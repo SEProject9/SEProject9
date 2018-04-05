@@ -1,29 +1,30 @@
 package service;
 
 import java.util.List;
-
 import pojo.TechSerReq;
 
 public interface TechSerReqService {
 
-	TechSerReq add(int ent_id, String title, String text);
+	TechSerReq add(TechSerReq req);
 
 	boolean delete(int id);
 
-	List<TechSerReq> searchByAdmin(int state, int ind_id);
+	List<TechSerReq> searchByAdmin(TechSerReq req);
 
 	/*搜索
 	 * 行业id
 	 * 标题*/
-	List<TechSerReq> searchByUser(int ind_id, String title);
+	List<TechSerReq> searchByUser(TechSerReq req);
 
-	// 企业用户搜寻自己所有发布
-	List<TechSerReq> listByEntId(int id);
+	// 企业显示自己的发布
+	List<TechSerReq> listhByEnt(Integer state);
 
 	TechSerReq show(int id);
 
-	boolean changeState(int id, int state);
+	// 管理员审核更改状态
+	boolean changeState(TechSerReq req);
 
-	boolean changeInfo(int id, TechSerReq req);
+	// 用户更改信息
+	boolean changeInfo(TechSerReq req);
 
 }

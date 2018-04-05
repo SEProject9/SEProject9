@@ -6,11 +6,8 @@ import pojo.IndustryData;
 
 public interface IndustryDataMapper {
 
-	public IndustryData get(int id);
+	public IndustryData get(Integer id);
 
-	public List<IndustryData> list();
+	public List<IndustryData> list(Integer indId);
 
-	public List<IndustryData> search(String indId, String title);
-
-	// public List<IndustryData> searchBydate(String dateBeg, String dateEnd);
 }

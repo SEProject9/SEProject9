@@ -6,24 +6,24 @@ import pojo.Enterprise;
 
 public interface EnterpriseService {
 
-	Enterprise login(String account, String password);
+	Enterprise login(Enterprise ent);
 
-	boolean signupSave(String account, String password);
+	boolean signupSave(Enterprise ent);
 
-	boolean signupCheck(String account);
+	boolean signupCheck(Enterprise ent);
 
 	boolean delete(int id);
 
-	boolean changePassword(int id, String pw);
+	boolean changePassword(Enterprise ent);
 
-	boolean changeState(int id, int state);
+	boolean changeState(Enterprise ent);
 
 	/*管理员搜索
 	 * 状态
 	 * 企业名
 	 * 地址*/
-	List<Enterprise> search(int state, String name, String add);
+	List<Enterprise> search(Enterprise ent);
 
-	Enterprise searchByAccount(String account);
+	Enterprise getById(Integer id);
 
 }

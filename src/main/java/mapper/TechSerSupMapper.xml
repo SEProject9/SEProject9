@@ -4,21 +4,41 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.TechSerSupMapper">
 	<insert id="add" parameterType="TechSerSup">
-		insert into tech_ser_sup_list ( name ) values (#{name})
+		insert into tech_ser_sup_list
+		(ind_id, ent_id,sup_date,sup_title,sup_text)
+		values
+		(#{ind_id},#{ent_id},#{sup_date},#{sup_title},#{sup_text})
 	</insert>
 
-	<delete id="delete" parameterType="TechSerSup">
-		delete from tech_ser_sup_list where id= #{id}
+	<delete id="delete" parameterType="_int">
+		delete from tech_ser_sup_list
+		where sup_id= #{id}
 	</delete>
 
-	<select id="get" parameterType="_int" resultType="TechSerSup">
-		select * from tech_ser_sup_list where id= #{id}
+	<select id="getById" parameterType="_int" resultType="TechSerSup">
+		select *
+		from
+		tech_ser_sup_list where sup_id= #{id}
 	</select>
 
 	<update id="update" parameterType="TechSerSup">
-		update tech_ser_sup_list set name=#{name} where id=#{id}
+		update tech_ser_sup_list
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="sup_title!=null">sup_title=#{sup_title}</if>
+			<if test="sup_text!=null">sup_text=#{sup_text}</if>
+			<if test="state!=null">state=#{state}</if>
+		</trim>
+		where sup_id=#{sup_id}
 	</update>
-	<select id="list" resultType="TechSerSup">
+
+	<select id="search" resultType="TechSerSup">
 		select * from tech_ser_sup_list
+		<trim prefix="WHERE" suffixOverrides="AND ||OR ">
+			<if test="ind_id!=nulll">and ind_id=#{ind_id}</if>
+			<if test="sup_title !=null ">
+				and sup_title like concat('%',#{sup_title},'%')
+			</if>
+			<if test="state!=null">and state=#{state}</if>
+		</trim>
 	</select>
 </mapper>

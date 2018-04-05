@@ -3,23 +3,60 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-	<mapper namespace="mapper.EnterpriseInfoMapper">
-	    <insert id="add" parameterType="EnterpriseInfo" >
-	        insert into enterprise_info_list ( name ) values (#{name})    
-	    </insert>
-	    
-	    <delete id="delete" parameterType="EnterpriseInfo" >
-	        delete from enterprise_info_list where id= #{id}   
-	    </delete>
-	    
-	    <select id="get" parameterType="_int" resultType="EnterpriseInfo">
-	        select * from   enterprise_info_list  where id= #{id}    
-	    </select>
+<mapper namespace="mapper.EnterpriseInfoMapper">
+	<insert id="add" parameterType="EnterpriseInfo">
+		insert into enterprise_info_list
+		(ind_id, ent_name,ent_num,ent_add,ent_phone,ent_text)
+		values
+		(#{ind_id},#{ent_name},#{ent_num},
+		#{ent_add},#{ent_phone},#{ent_text})
+	</insert>
 
-	    <update id="update" parameterType="EnterpriseInfo" >
-	        update enterprise_info_list set name=#{name} where id=#{id}    
-	    </update>
-	    <select id="list" resultType="EnterpriseInfo">
-	        select * from   enterprise_info_list      
-	    </select>	    
-	</mapper>
+	<delete id="delete" parameterType="EnterpriseInfo">
+		delete from
+		enterprise_info_list where ent_id= #{id}
+	</delete>
+
+	<select id="get" parameterType="_int" resultType="EnterpriseInfo">
+		select * from
+		enterprise_info_list where ent_id= #{id}
+	</select>
+
+	<update id="update" parameterType="EnterpriseInfo">
+		update enterprise_info_list
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="ent_name!=null">
+				ent_name=#{ent_name}
+			</if>
+			<if test="ent_num!=null">
+				ent_num=#{ent_num}
+			</if>
+			<if test="ent_add!=null">
+				ent_add=#{ent_add}
+			</if>
+			<if test="ent_add!=null">
+				ent_add=#{ent_add}
+			</if>
+			<if test="ent_phone!=null">
+				ent_phone=#{ent_phone}
+			</if>
+			<if test="ent_text!=null">
+				ent_text=#{ent_text}
+			</if>
+		</trim>
+		where ent_id=#{ent_id}
+	</update>
+	<select id="search" resultType="EnterpriseInfo">
+		select * from enterprise_info_list
+		<trim prefix="WHERE" suffixOverrides="AND |OR ">
+			<if test="ind_id!=null">and ind_id=#{ind_id}</if>
+			<if test="ent_name!=null">
+				and ent_name like concat('%',#{ent_name},'%')
+			</if>
+			<if test="ent_add!=null">
+				and ent_add like concat('%',#{ent_add},'%')
+			</if>
+		</trim>
+
+	</select>
+</mapper>

@@ -13,14 +13,27 @@
 
 	<select id="get" parameterType="_int" resultType="Diary">
 		select * from
-		diary_list where id= #{id}
+		diary_list where id= ${id}
 	</select>
 
 	<update id="update" parameterType="Diary">
 		update diary_list set
-		name=#{name} where id=#{id}
+		dia_text=#{dia_text} where dia_id=#{dia_id}
 	</update>
+	
 	<select id="list" resultType="Diary">
 		select * from diary_list
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="admin_id!=null">
+				and admin_id=#{admin_id}
+			</if>
+			<if test="dia_type!=null">
+				and dia_type=#{dia_type}
+			</if>
+			<if test="dia_object!=null">
+				and dia_object=#{dia_object}
+			</if>
+		</trim>
 	</select>
+	
 </mapper>

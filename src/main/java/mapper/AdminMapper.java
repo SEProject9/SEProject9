@@ -7,10 +7,10 @@ import pojo.Admin;
 public interface AdminMapper {
 	public int add(Admin admin);
 
-	public Admin getByAccount(String account);
-
 	public int update(Admin admin);
 
-	public List<Admin> list();
+	public List<Admin> search();
+
+	public Admin getById(Integer id);
 
 }

@@ -2,6 +2,8 @@ package service.impl;
 
 import java.util.List;
 
+import javax.swing.plaf.synth.SynthOptionPaneUI;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,20 +17,14 @@ public class IndustryDataServiceImpl implements IndustryDataService {
 	IndustryDataMapper dataMapper;
 
 	@Override
-	public IndustryData show(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public IndustryData show(Integer id) {
+		return dataMapper.get(id);
 	}
 
 	@Override
-	public List<IndustryData> list() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<IndustryData> list(Integer indId) {
+		System.out.println("test");
+		return dataMapper.list(indId);
 	}
 
-	@Override
-	public List<IndustryData> search(String indId, String title) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

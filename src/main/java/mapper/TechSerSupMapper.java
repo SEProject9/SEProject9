@@ -10,7 +10,7 @@ public interface TechSerSupMapper {
 
 	public void delete(int id);
 
-	public TechSerSup get(int id);
+	public TechSerSup getById(int id);
 
 	public int update(TechSerSup sup);
 
@@ -19,7 +19,5 @@ public interface TechSerSupMapper {
 	 */
 	public List<TechSerSup> listByState(int state);
 
-	public List<TechSerSup> search(String title);
-
-	public int count();
+	public List<TechSerSup> search(TechSerSup sup);
 }

@@ -8,7 +8,7 @@ public interface DiaryService {
 
 	boolean add(Diary dia);
 
-	List<Diary> list();
+	List<Diary> search(Diary dia);
 
 	Diary getById(int id);
 

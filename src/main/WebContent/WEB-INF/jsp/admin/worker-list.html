@@ -1,0 +1,250 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5shiv.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css"
+	href="/sys_telecom/static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="/sys_telecom/static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css"
+	href="/sys_telecom/lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css"
+	href="/sys_telecom/static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css"
+	href="/sys_telecom/static/h-ui.admin/css/style.css" />
+<!--[if IE 6]>
+<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<title>员工列表</title>
+</head>
+<body>
+	<nav class="breadcrumb">
+		<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
+		员工管理 <span class="c-gray en">&gt;</span> 员工列表 <a
+			class="btn btn-success radius r"
+			style="line-height: 1.6em; margin-top: 3px"
+			href="javascript:location.replace(location.href);" title="刷新"><i
+			class="Hui-iconfont">&#xe68f;</i></a>
+	</nav>
+	<div class="page-container">
+		<div class="text-c">
+			<span class="select-box inline"> <select name=""
+				class="select">
+					<option value="0">全部分类</option>
+					<option value="1">分类一</option>
+					<option value="2">分类二</option>
+			</select>
+			</span> <input type="text" name="" id="" placeholder=" 员工名称"
+				style="width: 250px" class="input-text">
+			<button name="" id="" class="btn btn-success" type="submit">
+				<i class="Hui-iconfont">&#xe665;</i> 搜员工
+			</button>
+		</div>
+		<div class="cl pd-5 bg-1 bk-gray mt-20">
+			<span class="l"><a href="javascript:;" onclick="datadel()"
+				class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
+					批量删除</a> <a class="btn btn-primary radius" data-title="添加员工"
+				data-href="worker-add.html"
+				onclick="worker_add('add','worker-add.html')" href="javascript:;"><i
+					class="Hui-iconfont">&#xe600;</i> 添加员工</a></span> <span class="r">共有数据：<strong>54</strong>
+				条
+			</span>
+		</div>
+		<div class="mt-20">
+			<table
+				class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
+				<thead>
+					<tr class="text-c">
+						<th width="25"><input type="checkbox" name="" value=""></th>
+						<th width="100">员工ID</th>
+						<th width="100">员工帐号</th>
+						<th width="70">员工姓名</th>
+						<th width="50">员工性别</th>
+						<th width="50">员工年龄</th>
+						<th width="100">职位ID</th>
+						<th width="50">是否登录</th>
+						<th width="70">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+			<div id="page1"></div>
+		</div>
+	</div>
+	<!--_footer 作为公共模版分离出去-->
+	<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
+	<script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script>
+	<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script>
+	<script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
+	<!--/_footer 作为公共模版分离出去-->
+
+	<!--请在下方写此页面业务相关的脚本-->
+	<script type="text/javascript"
+		src="/sys_telecom/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+	<script type="text/javascript"
+		src="/sys_telecom/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="/sys_telecom/lib/laypage/1.2/laypage.js"></script>
+	<script type="text/javascript">
+
+		/*员工-添加*/
+		function worker_add(title, url, w, h) {
+			layer_show(title, url, w, h);
+		}
+		/*员工-编辑*/
+		function worker_edit(title, url, id, w, h) {
+
+			/* layer_show(title, url, w, h); */
+			var tr=$(w).parent().parent();
+			var tds=tr.children("td");
+			console.info("tds:"+tds);
+			var phone=tds.eq(1).text();//从1开始计数
+			console.info(phone);
+			
+			layer.open({
+				type : 2,
+				skin : 'layui-layer-lan',
+				title : title,
+				fix : false,
+				shadeClose : false,
+				maxmin : true,
+				move : false,
+				closeBtn : 2,
+				area : [ '750px', '450px' ],
+				content : url,
+				success : function(layero, index) {
+					var body = layer.getChildFrame('body', index);//建立父子联系
+					// console.log(arr); //得到iframe页的body内容
+					// console.log(body.find('input'));
+					var inputList = body.find('input');
+					for (var j = 1; j < inputList.length; j++) {
+						$(inputList[j]).val(tds.eq(j).text());
+					}
+				}
+			});
+		}
+		/*员工-删除*/
+		function worker_del(obj, id) {
+			layer.confirm('确认要删除吗？', function(index) {
+				$.ajax({
+					type : 'POST',
+					url : 'Admin/worker/delete',
+					dataType : 'json',
+					success : function(data) {
+						if(!data.success){
+							layer.msg('未删除!外键约束', {
+								icon : 1,
+								time : 1000
+							});
+							return;
+						}
+						$(obj).parents("tr").remove();
+						layer.msg('已删除!', {
+							icon : 1,
+							time : 1000
+						});
+					},
+					error : function(data) {
+						console.log(data.msg);
+					},
+				});
+			});
+		}
+		function integratingData(data) {
+			var html = '';
+			for (var i = 0; i < data.length; i++) {
+				html += ' <tr class="text-c">'
+						+ '	<td><input type="checkbox" value="" name=""></td>'
+						+ '	<td>'
+						+ data[i].worker_id
+						+ '</td>'
+						+ '	<td >'
+						+ data[i].worker_account
+						+ '</td>'
+						+ '	<td>'
+						+ data[i].worker_name
+						+ '</td>'
+						+ '	<td >'
+						+ data[i].worker_sex
+						+ '</td>'
+						+ '	<td >'
+						+ data[i].worker_age
+						+ '</td>'
+						+ '	<td >'
+						+ data[i].post_id
+						+ '</td>'
+						+ '	<td>'
+						+ data[i].state
+						+ '</td>'
+						+ '	<td class="f-14 td-manage"><a style="text-decoration: none" class="ml-5"'
+						+ '	onClick=worker_edit("员工编辑","worker-add.html","'
+						+ data[i].worker_id
+						+ '",this)'
+						+ '	href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>'
+						+ '	<a style="text-decoration: none" class="ml-5"'
+						+ '	onClick=worker_del(this,'
+						+ data[i].worker_id
+						+ ') href="javascript:;"'
+						+ '	title="删除">'
+						+ '	<i class="Hui-iconfont">&#xe6e2;</i>'
+						+ '	</a>'
+						+ '	</td>' 
+						+ '</tr>';
+			}
+			$('tbody tr').remove();
+			$('tbody').append(html);
+		}
+		function menulists(url, curr) {
+			var page = 1; //向服务端传的参数
+			if (curr != 1)
+				page = curr;
+			$.ajax({
+				type : 'get',
+				url : url,
+				cache : false,
+				dataType : "json",
+				success : function(json) {
+					console.info("total:" + json.total);
+					console.info(json.success);
+					console.info(json.data);
+					console.info("curr:" + json.curr);
+					integratingData(json.data);
+					//显示分页
+					laypage({
+						cont : 'page1', //容器。值支持id名、原生dom对象，jquery对象。【如该容器为】：<div id="page1"></div>
+						pages : Math.ceil((json.total)/(json.limit)), //通过后台拿到的总页数
+						skip : true, //是否开启跳页
+						skin : '#6665fe',
+						limit : 10,//每页总页数
+						curr : curr || 1, //当前页;curr回调,所以不用声明
+						jump : function(obj, first) { //触发分页后的回调(点击上面的页码或输入第几页进行跳转),需要传
+							//给服务器返回相对应的数据页
+							if (!first) { //点击跳页触发函数自身，并传递当前页：obj.curr
+								$('tbody tr').remove();
+								url = 'Admin/Worker/list?';
+								menulists(url + "curr=" + obj.curr + "&limit="
+										+ obj.limit, obj.curr);
+								console.info("this curr:" + obj.curr);
+							}
+						}
+					});
+				}
+			})
+		}
+
+		//初始化 默认全部
+		menulists('Admin/Worker/list?', 1);
+	</script>
+</body>
+</html>

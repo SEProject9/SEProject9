@@ -21,14 +21,9 @@ public class IndustryInfoServiceImpl implements IndustryInfoService {
 	}
 
 	@Override
-	public List<IndustryInfo> list() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<IndustryInfo> list(Integer indId) {
+		System.out.println("test");
+		return infoMapper.list(indId);
 	}
 
-	@Override
-	public List<IndustryInfo> search(String indId, String title) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

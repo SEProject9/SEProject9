@@ -11,6 +11,6 @@ public interface DiaryMapper {
 
 	public int update(String dia_text);
 
-	public List<Diary> list();
+	public List<Diary> search(Diary dia);
 
 }

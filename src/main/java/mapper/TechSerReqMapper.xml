@@ -5,21 +5,41 @@
 
 <mapper namespace="mapper.TechSerReqMapper">
 	<insert id="add" parameterType="TechSerReq">
-		insert into tech_ser_req_list ( name ) values (#{name})
+		insert into tech_ser_req_list
+		(ind_id, ent_id,req_date,req_title,req_text)
+		values
+		(#{ind_id},#{ent_id},#{req_date},#{req_title},#{req_text})
 	</insert>
 
-	<delete id="delete" parameterType="TechSerReq">
-		delete from tech_ser_req_list where id= #{id}
+	<delete id="delete" parameterType="_int">
+		delete from tech_ser_req_list
+		where req _id= #{id}
 	</delete>
 
-	<select id="get" parameterType="_int" resultType="TechSerReq">
-		select * from tech_ser_req_list where id= #{id}
+	<select id="getById" parameterType="_int" resultType="TechSerReq">
+		select *
+		from
+		tech_ser_req_list where req_id= #{id}
 	</select>
 
 	<update id="update" parameterType="TechSerReq">
-		update tech_ser_req_list set name=#{name} where id=#{id}
+		update tech_ser_req_list
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="req_title!=null">req_title=#{req_title}</if>
+			<if test="req_text!=null">req_text=#{req_text}</if>
+			<if test="state!=null">state=#{state}</if>
+		</trim>
+		where req_id=#{req_id}
 	</update>
-	<select id="list" resultType="TechSerReq">
+
+	<select id="search" resultType="TechSerReq">
 		select * from tech_ser_req_list
+		<trim prefix="WHERE" suffixOverrides="AND ||OR">
+			<if test="ind_id!=nulll">and ind_id=#{ind_id}</if>
+			<if test="req_title !=null ">
+				and req_title like concat('%',#{req_title},'%')
+			</if>
+			<if test="state!=null">and state=#{state}</if>
+		</trim>
 	</select>
 </mapper>

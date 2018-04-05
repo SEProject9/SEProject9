@@ -20,13 +20,12 @@ public class DiaryServiceImpl implements DiaryService {
 
 	@Override
 	public boolean add(Diary dia) {
-		diaryMapper.add(dia);
-		System.out.println("service diary here");
+		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public List<Diary> list() {
+	public List<Diary> search(Diary dia) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -43,31 +42,10 @@ public class DiaryServiceImpl implements DiaryService {
 		return false;
 	}
 
+	@Override
 	public void test() {
-		System.out.println("test");
+		// TODO Auto-generated method stub
+
 	}
 
-	/*public static void main(String[] args) {
-		DiaryService ds = new DiaryServiceImpl();
-		Diary d = new Diary();
-		d.setAdmin_id(1);
-		d.setDia_object("1");
-		d.setDia_text("2");
-		d.setDia_time("2");
-		d.setDia_type("3");
-		ds.add(d);
-		System.out.println("here");
-	}*/
-	/*@Test
-	public void testAdd() {
-		Diary d = new Diary();
-		d.setAdmin_id(1);
-		d.setDia_object("1");
-		d.setDia_text("2");
-		d.setDia_time("2");
-		d.setDia_type("3");
-		System.out.println(diaryMapper);
-		// diaryMapper.add(d);
-	
-	}*/
 }

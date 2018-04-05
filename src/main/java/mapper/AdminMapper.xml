@@ -5,21 +5,26 @@
 
 <mapper namespace="mapper.AdminMapper">
 	<insert id="add" parameterType="Admin">
-		insert into admin_list ( name ) values (#{name})
+		insert into admin_list (
+		admin_account,admin_password ) values
+		(#{admin_account},#{admin_password})
 	</insert>
 
-	<delete id="delete" parameterType="Admin">
-		delete from admin_list where id= #{id}
-	</delete>
-
 	<select id="get" parameterType="_int" resultType="Admin">
-		select * from admin_list where id= #{id}
+		select * from
+		admin_list where admin_id= #{id}
 	</select>
 
 	<update id="update" parameterType="Admin">
-		update admin_list set name=#{name} where id=#{id}
+		update admin_list set
+		admin_password=#{admin_password} where admin_id=#{admin_id}
 	</update>
-	<select id="list" resultType="Admin">
+	<select id="search" resultType="Admin">
 		select * from admin_list
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="admin_account!=null">
+				and admin_account=#{admin_account}
+			</if>
+		</trim>
 	</select>
 </mapper>

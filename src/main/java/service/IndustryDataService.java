@@ -5,12 +5,10 @@ import pojo.IndustryData;
 
 public interface IndustryDataService {
 	// 显示详情
-	IndustryData show(int id);
+	IndustryData show(Integer id);
 
 	// 显示所有
-	List<IndustryData> list();
-
-	List<IndustryData> search(String indId, String title);
+	List<IndustryData> list(Integer indId);
 
 	/*按照日期显示
 	 * 先不管了

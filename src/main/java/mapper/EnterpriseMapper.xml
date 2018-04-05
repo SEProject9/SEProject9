@@ -3,23 +3,51 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-	<mapper namespace="mapper.EnterpriseMapper">
-	    <insert id="add" parameterType="Enterprise" >
-	        insert into enterprise_list ( name ) values (#{name})    
-	    </insert>
-	    
-	    <delete id="delete" parameterType="Enterprise" >
-	        delete from enterprise_list where id= #{id}   
-	    </delete>
-	    
-	    <select id="get" parameterType="_int" resultType="Enterprise">
-	        select * from   enterprise_list  where id= #{id}    
-	    </select>
+<mapper namespace="mapper.EnterpriseMapper">
+	<insert id="add" parameterType="Enterprise">
+		insert into enterprise_list (
+		ent_account,ent_password )
+		values (#{ent_account},#{ent_password})
+	</insert>
 
-	    <update id="update" parameterType="Enterprise" >
-	        update enterprise_list set name=#{name} where id=#{id}    
-	    </update>
-	    <select id="list" resultType="Enterprise">
-	        select * from   enterprise_list      
-	    </select>	    
-	</mapper>
+	<delete id="delete" parameterType="Enterprise">
+		delete from enterprise_list
+		where ent_id= #{id}
+	</delete>
+
+	<select id="getById" parameterType="_int" resultType="Enterprise">
+		select *
+		from
+		enterprise_list where ent_id= #{id}
+	</select>
+
+	<update id="update" parameterType="Enterprise">
+		update enterprise_list
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="ent_password!=null">
+				ent_password=#{ent_password}
+			</if>
+			<if test="admin_id!=null">
+				admin_id=#{admin_id}
+			</if>
+			<if test="state!=null">
+				state=#{state}
+			</if>
+		</trim>
+		where ent_id=#{ent_id}
+	</update>
+	<select id="search" resultType="Enterprise">
+		select * from enterprise_list
+		<trim prefix="WHERE" suffixOverrides="AND |OR ">
+			<if test="ent_account!=null">
+				and ent_account=#{ent_account}
+			</if>
+			<if test="admin_id!=null">
+				and admin_id=#{admin_id}
+			</if>
+			<if test="state!=null">
+				and state=#{state}
+			</if>
+		</trim>
+	</select>
+</mapper>

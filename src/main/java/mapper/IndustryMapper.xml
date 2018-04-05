@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.IndustryMapper">
+	<select id="get" parameterType="_int" resultType="Industry">
+		select * from
+		industry_list where ind_id=#{id}
+	</select>
+	<select id="list" resultType="Industry">
+		select * from industry_list
+	</select>
+</mapper>

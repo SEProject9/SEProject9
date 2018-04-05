@@ -14,9 +14,6 @@ public interface EnterpriseInfoMapper {
 
 	public int update(EnterpriseInfo ei);
 
-	// 默认state=1
-	public List<EnterpriseInfo> list();
-
 	/*默认显示所有通过审核的(管理员人员不用到)
 	 * 行业
 	 * 企业名字

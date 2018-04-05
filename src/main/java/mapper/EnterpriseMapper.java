@@ -7,9 +7,9 @@ public interface EnterpriseMapper {
 
 	public int add(Enterprise ent);
 
-	public void delete(int id);
+	public void delete(Integer id);
 
-	public Enterprise getByAccount(String account);
+	public Enterprise getById(Integer id);
 
 	// 更新密码/状态
 	public int update(Enterprise ent);
@@ -18,7 +18,7 @@ public interface EnterpriseMapper {
 	 * 状态
 	 * 企业名
 	 * 地址*/
-	public List<Enterprise> list(Enterprise ent);
+	public List<Enterprise> search(Enterprise ent);
 
 	/*使用pageHelper工具
 	 * public int count();*/

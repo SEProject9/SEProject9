@@ -16,10 +16,12 @@ public interface EnterpriseInfoService {
 	 * 行业
 	 * 企业名字
 	 * 企业地址*/
-	List<EnterpriseInfo> search(EnterpriseInfo ei);
+	List<EnterpriseInfo> searchByAdmin(EnterpriseInfo ei);
 
-	EnterpriseInfo get(int id);
+	List<EnterpriseInfo> searchByUser(EnterpriseInfo ei);
 
-	boolean update(EnterpriseInfo ent);
+	EnterpriseInfo show(int id);
+
+	boolean update(EnterpriseInfo ei);
 
 }
