@@ -3,9 +3,27 @@ package pojo;
 public class TechSerReq {
 	private Integer req_id;
 	private Integer ent_id;
+	private Integer ind_id;
+	private String req_date;
 	private String req_title;
 	private String req_text;
-	private String state;
+	private Integer state;
+
+	public String getReq_date() {
+		return req_date;
+	}
+
+	public void setReq_date(String req_date) {
+		this.req_date = req_date;
+	}
+
+	public Integer getInd_id() {
+		return ind_id;
+	}
+
+	public void setInd_id(Integer ind_id) {
+		this.ind_id = ind_id;
+	}
 
 	public Integer getReq_id() {
 		return req_id;
@@ -39,11 +57,11 @@ public class TechSerReq {
 		this.req_text = req_text;
 	}
 
-	public String getState() {
+	public Integer getState() {
 		return state;
 	}
 
-	public void setState(String state) {
+	public void setState(Integer state) {
 		this.state = state;
 	}
 }

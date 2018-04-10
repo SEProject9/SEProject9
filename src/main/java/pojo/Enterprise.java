@@ -5,7 +5,7 @@ public class Enterprise {
 	private String ent_acount;
 	private String ent_password;
 	private Integer admin_id;
-	private String state;
+	private Integer state;
 
 	public Integer getEnt_id() {
 		return ent_id;
@@ -39,11 +39,11 @@ public class Enterprise {
 		this.admin_id = admin_id;
 	}
 
-	public String getState() {
+	public Integer getState() {
 		return state;
 	}
 
-	public void setState(String state) {
+	public void setState(Integer state) {
 		this.state = state;
 	}
 }

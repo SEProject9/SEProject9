@@ -15,8 +15,11 @@ public class TechSerSupServiceImpl implements TechSerSupService {
 
 	@Override
 	public TechSerSup add(TechSerSup sup) {
-		// TODO Auto-generated method stub
-		return null;
+		int i = 0;
+		i = supMapper.add(sup);
+		if (i == 0)
+			return null;
+		return sup;
 	}
 
 	@Override
@@ -33,8 +36,12 @@ public class TechSerSupServiceImpl implements TechSerSupService {
 
 	@Override
 	public List<TechSerSup> searchByUser(TechSerSup sup) {
-		// TODO Auto-generated method stub
-		return null;
+
+		sup.setState(1);
+		List<TechSerSup> list = supMapper.search(sup);
+		if (null == list || list.size() == 0)
+			return null;
+		return list;
 	}
 
 	@Override
@@ -45,8 +52,8 @@ public class TechSerSupServiceImpl implements TechSerSupService {
 
 	@Override
 	public TechSerSup show(int id) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return supMapper.getById(id);
 	}
 
 	@Override

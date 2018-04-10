@@ -10,14 +10,17 @@ import pojo.TechSerReq;
 import service.TechSerReqService;
 
 @Service
-public class TechSerReqServiceImpl implements TechSerReqService{
+public class TechSerReqServiceImpl implements TechSerReqService {
 	@Autowired
 	TechSerReqMapper reqMapper;
 
 	@Override
 	public TechSerReq add(TechSerReq req) {
-		// TODO Auto-generated method stub
-		return null;
+		int i = 0;
+		i = reqMapper.add(req);
+		if (i == 0)
+			return null;
+		return req;
 	}
 
 	@Override
@@ -34,8 +37,11 @@ public class TechSerReqServiceImpl implements TechSerReqService{
 
 	@Override
 	public List<TechSerReq> searchByUser(TechSerReq req) {
-		// TODO Auto-generated method stub
-		return null;
+		req.setState(1);
+		List<TechSerReq> list = reqMapper.search(req);
+		if (null == list || list.size() == 0)
+			return null;
+		return list;
 	}
 
 	@Override
@@ -46,8 +52,8 @@ public class TechSerReqServiceImpl implements TechSerReqService{
 
 	@Override
 	public TechSerReq show(int id) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return reqMapper.getById(id);
 	}
 
 	@Override
