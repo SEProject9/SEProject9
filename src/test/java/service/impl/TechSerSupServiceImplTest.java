@@ -10,16 +10,15 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import pojo.TechSerReq;
-import service.TechSerReqService;
+import pojo.TechSerSup;
+import service.TechSerSupService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:applicationContext.xml" })
-public class TechSerReqServiceImplTest {
+public class TechSerSupServiceImplTest {
 
 	@Autowired
-	private TechSerReqService req;
+	private TechSerSupService sup;
 
 	@Before
 	public void setUp() throws Exception {
@@ -27,25 +26,26 @@ public class TechSerReqServiceImplTest {
 
 	@Test
 	public void testAdd() {
-		TechSerReq reqP = new TechSerReq();
-		reqP.setEnt_id(1);
-		reqP.setReq_title("qwe");
-		System.out.println(req.add(reqP));
+
+		TechSerSup supP = new TechSerSup();
+		supP.setSup_title("asd");
+		sup.add(supP);
+
 	}
 
 	@Test
 	public void testSearchByUser() {
-		TechSerReq reqP = new TechSerReq();
-		List<TechSerReq> list = req.searchByUser(reqP);
-		for (TechSerReq tec : list)
-			System.out.println(tec.getReq_title());
+		TechSerSup supP = new TechSerSup();
+		supP.setState(1);
+		List<TechSerSup> list = sup.searchByUser(supP);
+		for (TechSerSup tec : list)
+			System.out.println(tec.getSup_title());
+
 	}
 
 	@Test
 	public void testShow() {
-		TechSerReq reqP = req.show(1);
-		System.out.println(reqP.getReq_title());
-
+		fail("Not yet implemented");
 	}
 
 }

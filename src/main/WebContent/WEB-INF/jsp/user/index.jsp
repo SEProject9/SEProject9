@@ -2,7 +2,8 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@include file="../include/_meta.jsp"%>
+<%-- <%@include file="../include/_meta.jsp"%> --%>
+<%@include file="/WEB-INF/jsp/include/_meta.jsp"%>
 
 
 
@@ -195,7 +196,7 @@
 	<div id="iframe_box" class="Hui-article">
 		<div class="show_iframe">
 			<div style="display: none" class="loading"></div>
-			<iframe scrolling="yes" frameborder="0" src="welcome.jsp"></iframe>
+			<iframe scrolling="yes" frameborder="0" src="/sys_edu/welcome.jsp"></iframe>
 		</div>
 	</div>
 </section>
@@ -207,7 +208,8 @@
 	</ul>
 </div>
 
-<%@include file="../include/_footer.jsp"%>
+<%-- <%@include file="../include/_footer.jsp"%> index从admin移出后错误--%>
+<%@include file="/WEB-INF/jsp/include/_footer.jsp"%>
 
 <script type="text/javascript">
 	$(function() {

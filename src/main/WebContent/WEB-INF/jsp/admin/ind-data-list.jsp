@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@include file="../include/_meta.jsp"%>
+<%@include file="/WEB-INF/jsp/include/_meta.jsp"%>
 
 
 
@@ -10,10 +10,8 @@
 
 	<c:forEach items="${info}" var="c" varStatus="st">
 		<div style="margin-buttom: 1px">
-		<%-- <a href="">${c.title }</a> --%>
-		${c.title }<br /> 
-		${c.ind_date }<br />
-			source:${c.source}<br />
+			<%-- <a href="">${c.title }</a> --%>
+			${c.title }<br /> ${c.ind_date }<br /> source:${c.source}<br />
 		</div>
 
 	</c:forEach>

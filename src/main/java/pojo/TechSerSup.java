@@ -4,26 +4,10 @@ public class TechSerSup {
 	private Integer sup_id;
 	private Integer ent_id;
 	private Integer ind_id;
-	private String req_date;
-	private String req_title;
-	private String req_text;
+	private String sup_date;
+	private String sup_title;
+	private String sup_text;
 	private Integer state;
-
-	public String getReq_date() {
-		return req_date;
-	}
-
-	public void setReq_date(String req_date) {
-		this.req_date = req_date;
-	}
-
-	public Integer getInd_id() {
-		return ind_id;
-	}
-
-	public void setInd_id(Integer ind_id) {
-		this.ind_id = ind_id;
-	}
 
 	public Integer getSup_id() {
 		return sup_id;
@@ -41,20 +25,36 @@ public class TechSerSup {
 		this.ent_id = ent_id;
 	}
 
-	public String getReq_title() {
-		return req_title;
+	public Integer getInd_id() {
+		return ind_id;
 	}
 
-	public void setReq_title(String req_title) {
-		this.req_title = req_title;
+	public void setInd_id(Integer ind_id) {
+		this.ind_id = ind_id;
 	}
 
-	public String getReq_text() {
-		return req_text;
+	public String getSup_date() {
+		return sup_date;
 	}
 
-	public void setReq_text(String req_text) {
-		this.req_text = req_text;
+	public void setSup_date(String sup_date) {
+		this.sup_date = sup_date;
+	}
+
+	public String getSup_title() {
+		return sup_title;
+	}
+
+	public void setSup_title(String sup_title) {
+		this.sup_title = sup_title;
+	}
+
+	public String getSup_text() {
+		return sup_text;
+	}
+
+	public void setSup_text(String sup_text) {
+		this.sup_text = sup_text;
 	}
 
 	public Integer getState() {

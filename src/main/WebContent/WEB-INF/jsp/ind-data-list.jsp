@@ -1,18 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@include file="../WEB-INF/jsp/include/_meta.jsp"%>
+<%@include file="/WEB-INF/jsp/include/_meta.jsp"%>
 
 
-<div class="pd-20">这是一个空白页</div>
 
 
-<div style="width: 500px; margin: 0px auto; text-align: center">
+<div style="width: 500px; margin: 2px auto; text-align: center">
 
 	<c:forEach items="${info}" var="c" varStatus="st">
-		<div style="margin-buttom: 3px; text-align: center">${c.title }
-			${c.ind_data } ${c.source}</div>
+		<div style="margin-buttom: 1px">
+			<%-- <a href="">${c.title }</a> --%>
+			${c.title }<br /> ${c.ind_date }<br /> source:${c.source}<br />
+		</div>
 
 	</c:forEach>
 
@@ -26,6 +26,6 @@
 
 
 
-<%@include file="../WEB-INF/jsp/include/_footer.jsp"%>
+<%@include file="/WEB-INF/jsp/include/_footer.jsp"%>
 </body>
 </html>

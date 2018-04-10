@@ -34,8 +34,8 @@
 
 	<select id="search" resultType="TechSerReq">
 		select * from tech_ser_req_list
-		<trim prefix="WHERE" suffixOverrides="AND ||OR">
-			<if test="ind_id!=nulll">and ind_id=#{ind_id}</if>
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="ind_id!=null">and ind_id=#{ind_id}</if>
 			<if test="req_title !=null ">
 				and req_title like concat('%',#{req_title},'%')
 			</if>

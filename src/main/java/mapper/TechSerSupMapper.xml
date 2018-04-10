@@ -33,8 +33,8 @@
 
 	<select id="search" resultType="TechSerSup">
 		select * from tech_ser_sup_list
-		<trim prefix="WHERE" suffixOverrides="AND ||OR ">
-			<if test="ind_id!=nulll">and ind_id=#{ind_id}</if>
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="ind_id!=null">and ind_id=#{ind_id}</if>
 			<if test="sup_title !=null ">
 				and sup_title like concat('%',#{sup_title},'%')
 			</if>

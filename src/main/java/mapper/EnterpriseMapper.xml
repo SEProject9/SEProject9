@@ -38,7 +38,7 @@
 	</update>
 	<select id="search" resultType="Enterprise">
 		select * from enterprise_list
-		<trim prefix="WHERE" suffixOverrides="AND |OR ">
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
 			<if test="ent_account!=null">
 				and ent_account=#{ent_account}
 			</if>

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@include file="../include/_meta.jsp"%>
+<%@include file="/WEB-INF/jsp/include/_meta.jsp"%>
 
 <div class="page-container">
 	<p class="f-20 text-success">

@@ -48,7 +48,7 @@
 	</update>
 	<select id="search" resultType="EnterpriseInfo">
 		select * from enterprise_info_list
-		<trim prefix="WHERE" suffixOverrides="AND |OR ">
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
 			<if test="ind_id!=null">and ind_id=#{ind_id}</if>
 			<if test="ent_name!=null">
 				and ent_name like concat('%',#{ent_name},'%')

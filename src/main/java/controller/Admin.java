@@ -28,7 +28,7 @@ public class Admin {
 
 	@RequestMapping("login")
 	public String login() {
-		return "admin/index";
+		return "user/index";
 	}
 
 	@RequestMapping("ent-list")
@@ -45,7 +45,7 @@ public class Admin {
 		// 放入转发参数
 		mav.addObject("info", info);
 		// 放入jsp路径
-		mav.setViewName("admin/ind-info-list");
+		mav.setViewName("ind-info-list");
 		return mav;
 	}
 
@@ -67,7 +67,7 @@ public class Admin {
 		// 放入转发参数
 		mav.addObject("info", info);
 		// 放入jsp路径
-		mav.setViewName("admin/ind-info-list");
+		mav.setViewName("ind-info-list");
 		return mav;
 	}
 
@@ -83,7 +83,7 @@ public class Admin {
 		// 放入转发参数
 		mav.addObject("info", info);
 		// 放入jsp路径
-		mav.setViewName("admin/ind-info-list");
+		mav.setViewName("ind-info-list");
 		return mav;
 	}
 
