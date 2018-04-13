@@ -26,5 +26,3 @@
 <link rel="stylesheet" type="text/css"
 	href="/sys_edu/static/h-ui.admin/css/style.css" />
 
-</head>
-<body>

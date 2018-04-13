@@ -5,7 +5,27 @@
 </head>
 <body>
 
-	<div class="pd-20">这是一个空白页</div>
+
+	<c:if test="null!=${msg}">
+	${msg}
+	</c:if>
+	<div style="width: 500px; margin: 2px auto; text-align: center">
+
+
+		<h1>${info.req_title }</h1>
+
+		<c:if test="null!=${entInfo.ent_name}">
+	${entInfo.ent_name}
+	</c:if>
+		${info.req_date }<br /> ${info.req_text }<br />
+
+
+
+
+	</div>
+
+
+
 
 
 	<%@include file="/WEB-INF/jsp/include/_footer.jsp"%>

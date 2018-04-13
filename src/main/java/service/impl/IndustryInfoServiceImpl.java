@@ -16,14 +16,12 @@ public class IndustryInfoServiceImpl implements IndustryInfoService {
 
 	@Override
 	public IndustryInfo show(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return infoMapper.get(id);
 	}
 
 	@Override
-	public List<IndustryInfo> list(Integer indId) {
-		System.out.println("test");
-		return infoMapper.list(indId);
+	public List<IndustryInfo> list(Integer indId, String title) {
+		return infoMapper.list(indId, title);
 	}
 
 }

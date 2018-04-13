@@ -46,8 +46,7 @@ public class EnterpriseInfoServiceImpl implements EnterpriseInfoService {
 
 	@Override
 	public EnterpriseInfo show(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return entInfoMapper.get(id);
 	}
 
 	@Override

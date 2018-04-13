@@ -29,7 +29,7 @@ public class TechSerReqServiceImplTest {
 	public void testAdd() {
 		TechSerReq reqP = new TechSerReq();
 		reqP.setEnt_id(1);
-		reqP.setReq_title("qwe");
+		reqP.setReq_title("c语言工程师需求");
 		System.out.println(req.add(reqP));
 	}
 

@@ -8,7 +8,7 @@ public interface IndustryDataService {
 	IndustryData show(Integer id);
 
 	// 显示所有
-	List<IndustryData> list(Integer indId);
+	List<IndustryData> list(Integer indId,String title);
 
 	/*按照日期显示
 	 * 先不管了

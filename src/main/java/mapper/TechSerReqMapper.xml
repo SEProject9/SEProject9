@@ -42,4 +42,10 @@
 			<if test="state!=null">and state=#{state}</if>
 		</trim>
 	</select>
+	<select id="listByState" parameterType="_int" resultType="TechSerReq">
+		select * from tech_ser_req_list
+		<if test="state!=null and state!='' or state==0">
+			where state=#{state}
+		</if>
+	</select>
 </mapper>

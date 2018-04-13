@@ -9,10 +9,16 @@
 		industry_info_list where ind_info_id= #{id}
 	</select>
 
-	<select id="list" parameterType="_int" resultType="IndustryInfo">
-	select * from industry_info_list
-	<if test="indId!=null">
-		where ind_id=#{indId}
-	</if>
+	<select id="list" resultType="IndustryInfo">
+		select * from industry_info_list
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="indId!=null">
+				and ind_id=#{indId,jdbcType=INTEGER}
+			</if>
+			<if test="title!=null">
+				and title like concat('%',#{title,jdbcType=VARCHAR},'%')
+			</if>
+		</trim>
+
 	</select>
 </mapper>

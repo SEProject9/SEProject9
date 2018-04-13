@@ -18,7 +18,7 @@ public interface TechSerSupService {
 	List<TechSerSup> searchByUser(TechSerSup sup);
 
 	// 企业用户搜寻自己所有发布
-	List<TechSerSup> listByEnt(TechSerSup sup);
+	List<TechSerSup> listByEnt(Integer state);
 
 	TechSerSup show(int id);
 

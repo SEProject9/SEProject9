@@ -17,7 +17,7 @@ public interface TechSerReqService {
 	List<TechSerReq> searchByUser(TechSerReq req);
 
 	// 企业显示自己的发布
-	List<TechSerReq> listhByEnt(Integer state);
+	List<TechSerReq> listByEnt(Integer state);
 
 	TechSerReq show(int id);
 

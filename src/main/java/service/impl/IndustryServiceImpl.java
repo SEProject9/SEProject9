@@ -10,14 +10,13 @@ import pojo.Industry;
 import service.IndustryService;
 
 @Service
-public class IndustryServiceImpl implements IndustryService{
+public class IndustryServiceImpl implements IndustryService {
 	@Autowired
 	IndustryMapper industryMapper;
 
 	@Override
 	public List<Industry> list() {
-		// TODO Auto-generated method stub
-		return null;
+		return industryMapper.list();
 	}
 
 	@Override
@@ -25,5 +24,5 @@ public class IndustryServiceImpl implements IndustryService{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 }

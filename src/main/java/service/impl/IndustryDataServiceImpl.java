@@ -22,9 +22,8 @@ public class IndustryDataServiceImpl implements IndustryDataService {
 	}
 
 	@Override
-	public List<IndustryData> list(Integer indId) {
-		System.out.println("test");
-		return dataMapper.list(indId);
+	public List<IndustryData> list(Integer indId, String title) {
+		return dataMapper.list(indId,title);
 	}
 
 }

@@ -5,6 +5,15 @@ public class Page {
 	int start = 0;
 	int count = 10;
 	int last = 0;
+	int total = 0;
+
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
+	}
 
 	public int getStart() {
 		return start;
@@ -32,6 +41,7 @@ public class Page {
 
 	public void caculateLast(int total) {
 		// 假设总数是50，是能够被5整除的，那么最后一页的开始就是45
+		this.setTotal(total);
 		if (0 == total % count)
 			last = total - count;
 		// 假设总数是51，不能够被5整除的，那么最后一页的开始就是50

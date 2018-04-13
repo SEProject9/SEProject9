@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import mapper.TechSerSupMapper;
 import pojo.TechSerSup;
 import service.TechSerSupService;
+import util.DateTimeUtil;
 
 @Service
 public class TechSerSupServiceImpl implements TechSerSupService {
@@ -15,6 +16,10 @@ public class TechSerSupServiceImpl implements TechSerSupService {
 
 	@Override
 	public TechSerSup add(TechSerSup sup) {
+		if (null == sup)
+			return sup;
+		String dateTime = DateTimeUtil.getDateTime();
+		sup.setSup_date(dateTime);
 		int i = 0;
 		i = supMapper.add(sup);
 		if (i == 0)
@@ -36,7 +41,8 @@ public class TechSerSupServiceImpl implements TechSerSupService {
 
 	@Override
 	public List<TechSerSup> searchByUser(TechSerSup sup) {
-
+		if (null == sup)
+			sup = new TechSerSup();
 		sup.setState(1);
 		List<TechSerSup> list = supMapper.search(sup);
 		if (null == list || list.size() == 0)
@@ -45,9 +51,9 @@ public class TechSerSupServiceImpl implements TechSerSupService {
 	}
 
 	@Override
-	public List<TechSerSup> listByEnt(TechSerSup sup) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<TechSerSup> listByEnt(Integer state) {
+
+		return supMapper.listByState(state);
 	}
 
 	@Override

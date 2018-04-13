@@ -2,6 +2,8 @@ package mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import pojo.TechSerSup;
 
 public interface TechSerSupMapper {
@@ -17,7 +19,7 @@ public interface TechSerSupMapper {
 	/*
 	 * 0审核未通过 1正常 2已匹配 3待审核
 	 */
-	public List<TechSerSup> listByState(int state);
+	public List<TechSerSup> listByState(@Param(value = "state") Integer state);
 
 	public List<TechSerSup> search(TechSerSup sup);
 }
