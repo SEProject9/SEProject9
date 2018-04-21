@@ -35,6 +35,7 @@
 		select * from tech_ser_sup_list
 		<trim prefix="WHERE" prefixOverrides="AND |OR ">
 			<if test="ind_id!=null">and ind_id=#{ind_id}</if>
+			<if test="ent_id!=null">and ent_id=#{ent_id}</if>
 			<if test="sup_title !=null ">
 				and sup_title like concat('%',#{sup_title},'%')
 			</if>

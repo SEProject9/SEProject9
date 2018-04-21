@@ -7,7 +7,7 @@ public interface EnterpriseMapper {
 
 	public int add(Enterprise ent);
 
-	public void delete(Integer id);
+	public int delete(Integer id);
 
 	public Enterprise getById(Integer id);
 

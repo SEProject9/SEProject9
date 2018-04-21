@@ -106,29 +106,30 @@ public class ListAll {
 	}
 
 	@RequestMapping("techSer-list")
-	public ModelAndView techSerList(Page page, @RequestParam("type") String type,
-			@RequestParam("state") Integer state) {
-		System.out.println("type:" + type);
-		System.out.println("state:" + state);
+	public ModelAndView techSerList(Page page, @RequestParam(value = "type", required = false) Integer type,
+			@RequestParam(value = "state", required = false) Integer state,
+			@RequestParam(value = "ent_id", required = false) Integer ent_id) {
+
 		ModelAndView mav = new ModelAndView();
 		PageHelper.offsetPage(page.getStart(), 20);// 只能针对一张表 不能两表共查
 		int total;
-		if (null != type && type.equals("require")) {
+
+		if (null != type && 2 == type) {
 			System.out.println("req");
-			List<TechSerReq> req = reqSer.listByEnt(state);
+			List<TechSerReq> req = reqSer.listByEnt(state, ent_id);
 			total = (int) new PageInfo<>(req).getTotal();
 			mav.addObject("info", req);
-
 		} else {
 			System.out.println("sup");
-			List<TechSerSup> sup = supSer.listByEnt(state);
+			List<TechSerSup> sup = supSer.listByEnt(state, ent_id);
 			total = (int) new PageInfo<>(sup).getTotal();
 			mav.addObject("info", sup);
 		}
 
 		page.caculateLast(total);
-		System.out.println("total:" + total);
 		// 放入jsp路径
+		mav.addObject("state", state);
+		mav.addObject("type", type);
 		mav.setViewName("user/techSer-list");
 		return mav;
 	}

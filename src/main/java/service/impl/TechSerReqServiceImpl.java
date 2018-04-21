@@ -29,8 +29,9 @@ public class TechSerReqServiceImpl implements TechSerReqService {
 	}
 
 	@Override
-	public boolean delete(int id) {
-		// TODO Auto-generated method stub
+	public boolean delete(Integer id) {
+		if (1 == reqMapper.delete(id))
+			return true;
 		return false;
 	}
 
@@ -51,9 +52,14 @@ public class TechSerReqServiceImpl implements TechSerReqService {
 		return list;
 	}
 
+	/*state
+	ent_id*/
 	@Override
-	public List<TechSerReq> listByEnt(Integer state) {
-		return reqMapper.listByState(state);
+	public List<TechSerReq> listByEnt(Integer state, Integer ent_id) {
+		TechSerReq req = new TechSerReq();
+		req.setState(state);
+		req.setEnt_id(ent_id);
+		return reqMapper.search(req);
 	}
 
 	@Override

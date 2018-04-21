@@ -103,7 +103,7 @@
 						<li><a data-href="/sys_edu/list/techSerSup-list"
 							data-title="技术与服务提供" href="javascript:void(0)">技术与服务提供</a></li>
 						<li><a
-							data-href="/sys_edu/list/techSer-list?type='supply'&state=1"
+							data-href="/sys_edu/list/techSer-list"
 							data-title="个人发布" href="javascript:void(0)">个人发布</a></li>
 					</ul>
 				</dd>

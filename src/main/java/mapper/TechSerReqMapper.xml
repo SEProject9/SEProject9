@@ -13,7 +13,7 @@
 
 	<delete id="delete" parameterType="_int">
 		delete from tech_ser_req_list
-		where req _id= #{id}
+		where req_id= #{id}
 	</delete>
 
 	<select id="getById" parameterType="_int" resultType="TechSerReq">
@@ -36,6 +36,7 @@
 		select * from tech_ser_req_list
 		<trim prefix="WHERE" prefixOverrides="AND |OR ">
 			<if test="ind_id!=null">and ind_id=#{ind_id}</if>
+			<if test="ent_id!=null">and ent_id=#{ent_id}</if>
 			<if test="req_title !=null ">
 				and req_title like concat('%',#{req_title},'%')
 			</if>

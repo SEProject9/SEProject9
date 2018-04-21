@@ -8,7 +8,7 @@ public interface TechSerSupService {
 
 	TechSerSup add(TechSerSup sup);
 
-	boolean delete(int id);
+	boolean delete(Integer id);
 
 	List<TechSerSup> searchByAdmin(TechSerSup sup);
 
@@ -18,7 +18,7 @@ public interface TechSerSupService {
 	List<TechSerSup> searchByUser(TechSerSup sup);
 
 	// 企业用户搜寻自己所有发布
-	List<TechSerSup> listByEnt(Integer state);
+	List<TechSerSup> listByEnt(Integer state, Integer ent_id);
 
 	TechSerSup show(int id);
 

@@ -28,8 +28,9 @@ public class TechSerSupServiceImpl implements TechSerSupService {
 	}
 
 	@Override
-	public boolean delete(int id) {
-		// TODO Auto-generated method stub
+	public boolean delete(Integer id) {
+		if (1 == supMapper.delete(id))
+			return true;
 		return false;
 	}
 
@@ -51,9 +52,12 @@ public class TechSerSupServiceImpl implements TechSerSupService {
 	}
 
 	@Override
-	public List<TechSerSup> listByEnt(Integer state) {
+	public List<TechSerSup> listByEnt(Integer state, Integer ent_id) {
 
-		return supMapper.listByState(state);
+		TechSerSup sup = new TechSerSup();
+		sup.setEnt_id(ent_id);
+		sup.setState(state);
+		return supMapper.search(sup);
 	}
 
 	@Override

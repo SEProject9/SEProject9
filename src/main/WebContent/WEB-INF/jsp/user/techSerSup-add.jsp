@@ -7,27 +7,10 @@
 	<article class="page-container">
 		<form action="/sys_edu/user/techSerSup-save" method="post"
 			class="form form-horizontal" id="form-bill-add">
-			<!-- <input type="hidden" name="idName" value="bill_id" />
-			<div class="row cl" style="display: none">
-				<label class="form-label col-xs-4 col-sm-3"><span
-					class="c-red">*</span>账单ID：</label>
-				<div class="formControls col-xs-8 col-sm-9">
-					<input type="hidden" class="input-text" value="" placeholder=""
-						id="roleName" name="ID">
-				</div>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3"><span
-					class="c-red">*</span>主叫号：</label>
-				<div class="formControls col-xs-8 col-sm-9">
-					<input class="input-text" value="" placeholder="" id="roleName"
-						name="user_phone">
-				</div>
-			</div> -->
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">行业：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<select name="ind_id">
+					<select name="ind_id" id="indSelect">
 						<c:forEach items="${info}" var="c" varStatus="st">
 							<option value="${c.ind_id}">${c.ind_name}</option>
 						</c:forEach>
@@ -37,14 +20,14 @@
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">标题：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" value="" placeholder="" id=""
-						name="sup_title">
+					<input type="text" class="input-text" value="" placeholder=""
+						id="title" name="sup_title">
 				</div>
 			</div>
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">供应描述：</label>
 				<div class="formControls col-xs-8 col-sm-9">
-					<textarea name="sup_text" rows="16" cols="100"></textarea>
+					<textarea name="sup_text" rows="16" cols="100" id="text"></textarea>
 				</div>
 			</div>
 			<div class="row cl">
@@ -61,13 +44,27 @@
 	<%@include file="/WEB-INF/jsp/include/_footer.jsp"%>
 
 	<!--请在下方写此页面业务相关的脚本-->
-	<script type="text/javascript"
+	<!-- 	<script type="text/javascript"
 		src="lib/jquery.validation/1.14.0/jquery.validate.js"></script>
 	<script type="text/javascript"
 		src="lib/jquery.validation/1.14.0/validate-methods.js"></script>
 	<script type="text/javascript"
-		src="lib/jquery.validation/1.14.0/messages_zh.js"></script>
+		src="lib/jquery.validation/1.14.0/messages_zh.js"></script> -->
+
 	<script type="text/javascript">
+		$(function() {
+			var techSer = ${techSer};
+			if (null == techSer)
+				return;
+			console.info(techSer);
+			$("indSelect>option").each(function() {
+				if ($(this).val() ==techSer.ind_id)
+					$(this).selected = "selected";
+			});
+			$("#title").attr("value", techSer.sup_title);
+			$("#text").html(techSer.sup_text);
+		});
+
 		/* $(function() {
 			$("#form-bill-add").validate({
 				rules : {

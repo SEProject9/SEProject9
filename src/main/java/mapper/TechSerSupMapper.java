@@ -10,7 +10,7 @@ public interface TechSerSupMapper {
 
 	public int add(TechSerSup sup);
 
-	public void delete(int id);
+	public int delete(int id);
 
 	public TechSerSup getById(int id);
 

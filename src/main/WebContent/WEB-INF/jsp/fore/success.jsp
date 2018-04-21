@@ -2,10 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="/WEB-INF/jsp/include/_meta.jsp"%>
-<%@ page isELIgnored="false"%>
+<%@ page isELIgnored="false" %>
 </head>
-<body>
-	消息:${msg} type:${type }
-	<br /> error
+<body>消息:${msg}
+type:${type }
+<br/>
+success
 </body>
 </html>

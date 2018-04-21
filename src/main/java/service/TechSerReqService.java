@@ -7,7 +7,7 @@ public interface TechSerReqService {
 
 	TechSerReq add(TechSerReq req);
 
-	boolean delete(int id);
+	boolean delete(Integer id);
 
 	List<TechSerReq> searchByAdmin(TechSerReq req);
 
@@ -17,7 +17,7 @@ public interface TechSerReqService {
 	List<TechSerReq> searchByUser(TechSerReq req);
 
 	// 企业显示自己的发布
-	List<TechSerReq> listByEnt(Integer state);
+	List<TechSerReq> listByEnt(Integer state,Integer ent_id);
 
 	TechSerReq show(int id);
 

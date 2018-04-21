@@ -8,7 +8,7 @@ public interface EnterpriseInfoMapper {
 
 	public int add(EnterpriseInfo ei);
 
-	public void delete(int id);
+	public int delete(int id);
 
 	public EnterpriseInfo get(int id);
 

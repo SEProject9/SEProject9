@@ -11,10 +11,15 @@
 	</c:if>
 	<div style="width: 100%; margin: 2px auto; text-align: center">
 
-		<h1>${info.ent_name }</h1>
-		${info.ent_add}&nbsp&nbsp${info.ent_phone}<br /> <br />
-		${info.ent_text }<br /> <a href="techSer-list?ent_id=${info.ent_id}">该企业发布技术服务供应与需求</a>
-	
+
+		<h1>${info.title }</h1>
+
+		<c:if test="null!=${entInfo.ent_name}">
+	${entInfo.ent_name}
+	</c:if>
+		 <a href="${info.url}">${info.source}</a>&nbsp&nbsp${info.ind_date}<br />
+		<br /> ${info.text }<br />
+
 	</div>
 
 
