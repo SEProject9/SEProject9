@@ -5,7 +5,7 @@
 <%@ page isELIgnored="false"%>
 </head>
 <body>
-	消息:${msg} type:${type }
+	消息:${msg} 
 	<br /> error
 </body>
 </html>

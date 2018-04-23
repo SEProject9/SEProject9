@@ -24,6 +24,13 @@
 						name="user_phone">
 				</div>
 			</div> -->
+			<div style="display: none">
+				<label class="form-label col-xs-4 col-sm-3">id:</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" value="" placeholder=""
+						id="id" name="req_id">
+				</div>
+			</div>
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">行业：</label>
 				<div class="formControls col-xs-8 col-sm-9">
@@ -80,6 +87,7 @@
 				if ($(this).val() == techSer.ind_id)
 					$(this).selected = "selected";
 			});
+			$("#id").attr("value", techSer.req_id);
 			$("#title").attr("value", techSer.req_title);
 			$("#text").html(techSer.req_text);
 		});

@@ -13,8 +13,9 @@
 
 		<h1>${info.ent_name }</h1>
 		${info.ent_add}&nbsp&nbsp${info.ent_phone}<br /> <br />
-		${info.ent_text }<br /> <a href="techSer-list?ent_id=${info.ent_id}">该企业发布技术服务供应与需求</a>
-	
+		${info.ent_text }<br /> <a
+			href="/sys_edu/list/techSer-list?ent_id=${info.ent_id}">该企业发布技术服务供应与需求</a>
+
 	</div>
 
 

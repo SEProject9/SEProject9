@@ -25,8 +25,8 @@
 	<update id="update" parameterType="TechSerReq">
 		update tech_ser_req_list
 		<trim prefix="SET" suffixOverrides=",">
-			<if test="req_title!=null">req_title=#{req_title}</if>
-			<if test="req_text!=null">req_text=#{req_text}</if>
+			<if test="req_title!=null">req_title=#{req_title},</if>
+			<if test="req_text!=null">req_text=#{req_text},</if>
 			<if test="state!=null">state=#{state}</if>
 		</trim>
 		where req_id=#{req_id}
@@ -40,7 +40,7 @@
 			<if test="req_title !=null ">
 				and req_title like concat('%',#{req_title},'%')
 			</if>
-			<if test="state!=null">and state=#{state}</if>
+			<if test="state!=null and state!='' or state==0">and state=#{state}</if>
 		</trim>
 	</select>
 	<select id="listByState" parameterType="_int" resultType="TechSerReq">

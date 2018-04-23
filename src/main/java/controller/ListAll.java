@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -46,20 +47,18 @@ public class ListAll {
 	EnterpriseInfoService entInfoSer;
 
 	@RequestMapping("entInfo-list")
-	public ModelAndView entList(Page page) {
+	public ModelAndView entInfoList(Page page, EnterpriseInfo entInfo) {
 		ModelAndView mav = new ModelAndView();
-		PageHelper.offsetPage(page.getStart(), 10);
-		List<EnterpriseInfo> info = entInfoSer.searchByUser(null);
+		PageHelper.offsetPage(page.getStart(), 20);
+		List<EnterpriseInfo> info = entInfoSer.searchByUser(entInfo);
 		int total = (int) new PageInfo<>(info).getTotal();
 
 		page.caculateLast(total);
 
 		List<Industry> list1 = indSer.list();
-		// 放入转发参数
+		mav.addObject("ind_id", entInfo.getInd_id());
 		mav.addObject("ind", list1);
-		// 放入转发参数
 		mav.addObject("info", info);
-		// 放入jsp路径
 		mav.setViewName("user/entInfo-list");
 		return mav;
 	}
@@ -120,7 +119,6 @@ public class ListAll {
 			total = (int) new PageInfo<>(req).getTotal();
 			mav.addObject("info", req);
 		} else {
-			System.out.println("sup");
 			List<TechSerSup> sup = supSer.listByEnt(state, ent_id);
 			total = (int) new PageInfo<>(sup).getTotal();
 			mav.addObject("info", sup);
@@ -130,6 +128,7 @@ public class ListAll {
 		// 放入jsp路径
 		mav.addObject("state", state);
 		mav.addObject("type", type);
+		mav.addObject("ent_id", ent_id);
 		mav.setViewName("user/techSer-list");
 		return mav;
 	}
@@ -253,13 +252,18 @@ public class ListAll {
 		return mav;
 	}
 
-	@RequestMapping("entInfo-show")
-	public ModelAndView entInfoShow(@RequestParam("id") Integer id) {
+	@RequestMapping("entInfo-show/{id}")
+	public ModelAndView entInfoShow(@PathVariable Integer id) {
 		ModelAndView mav = new ModelAndView();
+		if (null == id) {
+			mav.addObject("msg", "不存在该企业");
+			mav.setViewName("fore/error");
+			return mav;
+		}
 
 		EnterpriseInfo entInfo = entInfoSer.show(id);
 		if (null == entInfo) {
-			mav.addObject("msg", "no such record!");
+			mav.addObject("msg", "不存在该企业");
 			mav.setViewName("fore/error");
 			return mav;
 		}

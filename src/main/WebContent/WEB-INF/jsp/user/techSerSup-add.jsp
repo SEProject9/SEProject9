@@ -17,6 +17,13 @@
 					</select>
 				</div>
 			</div>
+			<div style="display: none">
+				<label class="form-label col-xs-4 col-sm-3">id:</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" value="" placeholder=""
+						id="id" name="sup_id">
+				</div>
+			</div>
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">标题：</label>
 				<div class="formControls col-xs-8 col-sm-9">
@@ -43,7 +50,9 @@
 
 	<%@include file="/WEB-INF/jsp/include/_footer.jsp"%>
 
-	<!--请在下方写此页面业务相关的脚本-->
+	<!--请在下方写此页面业务相关的脚本  -->
+	<!-- 用于填空判断是否为空 
+	根据规则判断是否发送后台-->
 	<!-- 	<script type="text/javascript"
 		src="lib/jquery.validation/1.14.0/jquery.validate.js"></script>
 	<script type="text/javascript"
@@ -58,9 +67,10 @@
 				return;
 			console.info(techSer);
 			$("indSelect>option").each(function() {
-				if ($(this).val() ==techSer.ind_id)
+				if ($(this).val() == techSer.ind_id)
 					$(this).selected = "selected";
 			});
+			$("#id").attr("value", techSer.sup_id);
 			$("#title").attr("value", techSer.sup_title);
 			$("#text").html(techSer.sup_text);
 		});

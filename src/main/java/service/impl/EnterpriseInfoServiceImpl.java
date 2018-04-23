@@ -40,8 +40,7 @@ public class EnterpriseInfoServiceImpl implements EnterpriseInfoService {
 
 	@Override
 	public List<EnterpriseInfo> searchByUser(EnterpriseInfo ei) {
-		// TODO Auto-generated method stub
-		return null;
+		return entInfoMapper.search(ei);
 	}
 
 	@Override

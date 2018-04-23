@@ -74,7 +74,8 @@ public class TechSerSupServiceImpl implements TechSerSupService {
 
 	@Override
 	public boolean changeInfo(TechSerSup sup) {
-		// TODO Auto-generated method stub
+		if (1 == supMapper.update(sup))
+			return true;
 		return false;
 	}
 

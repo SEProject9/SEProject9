@@ -16,9 +16,9 @@ p {
 <body>
 	<div class="cl pd-5 bg-1 bk-gray ">
 		<span class="l"><a class="btn btn-primary radius"
-			data-title="添加" data-href="/sys_edu/user/techSerReq-add"
-			href="/sys_edu/user/techSerReq-add"><i class="Hui-iconfont">&#xe600;</i>
-				添加</a></span>
+			data-title="添加" href="javascript:;"
+			onclick="techSer_add('添加用户','/sys_edu/user/techSerReq-add')"><i
+				class="Hui-iconfont">&#xe600;</i> 添加</a></span>
 		<div class="text-c">
 			<form action="/sys_edu/list/techSerReq-search">
 				<span class="select-box inline"> <select name="ind_id">
@@ -65,7 +65,14 @@ p {
 
 	<%@include file="/WEB-INF/jsp/include/_footer.jsp"%>
 	<script type="text/javascript">
-		
+		function techSer_add(title, url) {
+			var index = layer.open({
+				type : 2,
+				title : title,
+				content : url,
+				area : [ '1000px', '550px' ]
+			});
+		}
 	</script>
 </body>
 </html>

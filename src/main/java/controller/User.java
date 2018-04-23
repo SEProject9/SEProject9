@@ -36,7 +36,7 @@ public class User {
 			mav.addObject("techSer", json.toString());
 		}
 		List<Industry> list = indSer.list();
-
+		System.out.println("reqlist:" + list.size());
 		mav.addObject("info", list);
 		mav.setViewName("user/techSerReq-add");
 		return mav;
@@ -50,7 +50,7 @@ public class User {
 			mav.addObject("techSer", json);
 		}
 		List<Industry> list = indSer.list();
-
+		System.out.println("reqlist:" + list.size());
 		mav.addObject("info", list);
 		mav.setViewName("user/techSerSup-add");
 		return mav;
@@ -59,11 +59,18 @@ public class User {
 	@RequestMapping("techSerReq-save")
 	public ModelAndView techSerReqSave(TechSerReq req) {
 		ModelAndView mav = new ModelAndView();
-		req = reqSer.add(req);
+		if (null != req.getReq_id()) {
+			if (!reqSer.changeInfo(req)) {
+				mav.setViewName("fore/error");
+				return mav;
+			}
+		} else
+			req = reqSer.add(req);
+
 		if (null == req)
 			mav.setViewName("fore/error");
 
-		mav.addObject("msg", "add success!");
+		mav.addObject("msg", "operation success!");
 		// 放入转发参数
 		mav.addObject("info", req);
 		// 放入jsp路径
@@ -74,11 +81,20 @@ public class User {
 	@RequestMapping("techSerSup-save")
 	public ModelAndView techSerSupSave(TechSerSup sup) {
 		ModelAndView mav = new ModelAndView();
-		sup = supSer.add(sup);
-		if (null == sup)
+		if (null != sup.getSup_id()) {
+			if (!supSer.changeInfo(sup)) {
+				mav.addObject("msg", "change info fail");
+				mav.setViewName("fore/error");
+				return mav;
+			}
+		} else
+			sup = supSer.add(sup);
+		if (null == sup) {
+			mav.addObject("msg", "no sup");
 			mav.setViewName("fore/error");
+		}
 
-		mav.addObject("msg", "add success!");
+		mav.addObject("msg", "operation success!");
 		// 放入转发参数
 		mav.addObject("info", sup);
 		// 放入jsp路径

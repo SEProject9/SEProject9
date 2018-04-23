@@ -15,13 +15,17 @@ p {
 </head>
 <body>
 	<div class="cl pd-5 bg-1 bk-gray ">
-		<span class="l"><a class="btn btn-primary radius"
-			data-title="添加" data-href="/sys_edu/user/techSerReq-add"
-			href="/sys_edu/user/techSerReq-add"><i class="Hui-iconfont">&#xe600;</i>
-				发布需求</a>&nbsp&nbsp&nbsp<a class="btn btn-primary radius" data-title="添加"
-			data-href="/sys_edu/user/techSerSup-add"
-			href="/sys_edu/user/techSerSup-add"><i class="Hui-iconfont">&#xe600;</i>
-				发布供应</a></span>
+		<c:if
+			test="${session.user.ent_id!=null&&session.user.ent_id.equals(ent_id)}">判断是否查看自己企业&是否登录
+			<span class="l"><a class="btn btn-primary radius"
+				data-title="添加" href="javascript:;"
+				onclick="techSer_add('发布需求','/sys_edu/user/techSerReq-add')"><i
+					class="Hui-iconfont">&#xe600;</i> 发布需求</a>&nbsp&nbsp&nbsp<a
+				class="btn btn-primary radius" data-title="添加" href="javascript:;"
+				onclick="techSer_add('发布供应','/sys_edu/user/techSerSup-add')"><i
+					class="Hui-iconfont">&#xe600;</i> 发布供应</a></span>
+		</c:if>
+
 		<div class="text-c">
 			<span class="select-box inline"> <select name="state"
 				id="selectState">
@@ -81,6 +85,8 @@ p {
 		$(function() {
 			type = "${type}";
 			state = "${state}";
+
+			/* 	匹配不上默认第一个 */
 			$("#selectState>option").each(function() {
 				if ($(this).val() == state) {
 					this.selected = "selected";
@@ -93,13 +99,21 @@ p {
 			});
 
 		});
+		function techSer_add(title, url) {
+			var index = layer.open({
+				type : 2,
+				title : title,
+				content : url,
+				area : [ '1000px', '550px' ]
+			});
+		}
 		$("#selectState,#selectType").change(
 				function() {
 					var state = $("#selectState>option:selected").val();
 					var type = $("#selectType>option:selected").val();
 					console.info(state);
 					var url = "/sys_edu/list/techSer-list?state=" + state
-							+ "&type=" + type;
+							+ "&type=" + type + "&ent_id=" + "${ent_id}";
 					$(location).attr('href', url);
 				})
 	</script>

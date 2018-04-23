@@ -24,8 +24,8 @@
 	<update id="update" parameterType="TechSerSup">
 		update tech_ser_sup_list
 		<trim prefix="SET" suffixOverrides=",">
-			<if test="sup_title!=null">sup_title=#{sup_title}</if>
-			<if test="sup_text!=null">sup_text=#{sup_text}</if>
+			<if test="sup_title!=null">sup_title=#{sup_title},</if>
+			<if test="sup_text!=null">sup_text=#{sup_text},</if>
 			<if test="state!=null">state=#{state}</if>
 		</trim>
 		where sup_id=#{sup_id}
@@ -39,7 +39,7 @@
 			<if test="sup_title !=null ">
 				and sup_title like concat('%',#{sup_title},'%')
 			</if>
-			<if test="state!=null">and state=#{state}</if>
+			<if test="state!=null and state!='' or state==0">and state=#{state}</if>
 		</trim>
 	</select>
 

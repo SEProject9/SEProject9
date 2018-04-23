@@ -12,7 +12,7 @@
 	<header class="navbar-wrapper">
 		<div class="navbar navbar-fixed-top">
 			<div class="container-fluid cl">
-				<a class="logo navbar-logo f-l mr-10 hidden-xs" href="index.html">H-ui.admin</a>
+				<a class="logo navbar-logo f-l mr-10 hidden-xs" href=" /sys_edu/admin/login">H-ui.admin</a>
 				<a class="logo navbar-logo-m f-l mr-10 visible-xs" href="index.html">H-ui</a>
 				<span class="logo navbar-slogan f-l mr-10 hidden-xs">v3.1</span> <a
 					aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs"
@@ -24,17 +24,11 @@
 								class="Hui-iconfont">&#xe6d5;</i></a>
 							<ul class="dropDown-menu menu radius box-shadow">
 								<li><a href="javascript:;"
-									onclick="article_add('添加用户','user-add.html')"><i
-										class="Hui-iconfont">&#xe616;</i> 用户</a></li>
+									onclick="techSer_add('添加用户','/sys_edu/user/techSerReq-add')"><i
+										class="Hui-iconfont">&#xe616;</i> 技术服务需求</a></li>
 								<li><a href="javascript:;"
-									onclick="picture_add('添加客户','customer-add.html')"><i
-										class="Hui-iconfont">&#xe613;</i> 客户</a></li>
-								<li><a href="javascript:;"
-									onclick="product_add('添加账户','account-add.html')"><i
-										class="Hui-iconfont">&#xe620;</i> 账户</a></li>
-								<li><a href="javascript:;"
-									onclick="member_add('添加供应商','supplier-add.html','','510')"><i
-										class="Hui-iconfont">&#xe60d;</i> 供应商</a></li>
+									onclick="techSer_add('添加客户','/sys_edu/user/techSerSup-add')"><i
+										class="Hui-iconfont">&#xe613;</i> 技术服务供应</a></li>
 							</ul></li>
 					</ul>
 				</nav>
@@ -71,11 +65,18 @@
 		<div class="menu_dropdown bk_2">
 			<dl id="menu-account">
 				<dt>
-					<a style="text-decoration: none"
-						data-href="/sys_edu/list/entInfo-list" data-title="企业"
-						href="javascript:void(0)"> <i class="Hui-iconfont">&#xe616;</i>
-						企业<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></a>
+					<i class="Hui-iconfont">&#xe616;</i> 企业<i
+						class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 				</dt>
+				<dd>
+					<ul>
+						<li><a data-href="/sys_edu/list/entInfo-list"
+							data-title="其他企业" href="javascript:;">其他企业</a></li>
+						<li><a
+							data-href="/sys_edu/list/entInfo-show/${session.user.ent_id}"
+							data-title="我的企业" href="javascript:void(0)">我的企业</a></li>
+					</ul>
+				</dd>
 			</dl>
 			<dl id="menu-customer">
 				<dt>
@@ -102,8 +103,7 @@
 							data-title="技术与服务需求" href="javascript:;">技术与服务需求</a></li>
 						<li><a data-href="/sys_edu/list/techSerSup-list"
 							data-title="技术与服务提供" href="javascript:void(0)">技术与服务提供</a></li>
-						<li><a
-							data-href="/sys_edu/list/techSer-list"
+						<li><a data-href="/sys_edu/list/techSer-list"
 							data-title="个人发布" href="javascript:void(0)">个人发布</a></li>
 					</ul>
 				</dd>
@@ -218,65 +218,66 @@
 	<%@include file="/WEB-INF/jsp/include/_footer.jsp"%>
 
 	<script type="text/javascript">
-		$(function() {
-			/*$("#min_title_list li").contextMenu('Huiadminmenu', {
-				bindings: {
-					'closethis': function(t) {
-						console.log(t);
-						if(t.find("i")){
-							t.find("i").trigger("click");
-						}		
-					},
-					'closeall': function(t) {
-						alert('Trigger was '+t.id+'\nAction was Email');
-					},
-				}
+		/*$(function() {
+				$("#min_title_list li").contextMenu('Huiadminmenu', {
+					bindings: {
+						'closethis': function(t) {
+							console.log(t);
+							if(t.find("i")){
+								t.find("i").trigger("click");
+							}		
+						},
+						'closeall': function(t) {
+							alert('Trigger was '+t.id+'\nAction was Email');
+						},
+					}
+				});
 			});*/
-		});
 		/*个人信息*/
-		function myselfinfo() {
-			layer.open({
-				type : 1,
-				area : [ '300px', '200px' ],
-				fix : false, //不固定
-				maxmin : true,
-				shade : 0.4,
-				title : '查看信息',
-				content : '<div>管理员信息</div>'
-			});
-		}
+		/* 	function myselfinfo() {
+				layer.open({
+					type : 1,
+					area : [ '300px', '200px' ],
+					fix : false, //不固定
+					maxmin : true,
+					shade : 0.4,
+					title : '查看信息',
+					content : '<div>管理员信息</div>'
+				});
+			} */
 
 		/*资讯-添加*/
-		function article_add(title, url) {
+		function techSer_add(title, url) {
 			var index = layer.open({
 				type : 2,
 				title : title,
-				content : url
+				content : url,
+				area : [ '1000px', '550px' ]
 			});
-			layer.full(index);
 		}
 		/*图片-添加*/
-		function picture_add(title, url) {
+		/* function picture_add(title, url) {
 			var index = layer.open({
 				type : 2,
 				title : title,
 				content : url
 			});
 			layer.full(index);
-		}
+		} */
 		/*产品-添加*/
-		function product_add(title, url) {
-			var index = layer.open({
-				type : 2,
-				title : title,
-				content : url
-			});
-			layer.full(index);
-		}
+		/* 	function product_add(title, url) {
+				var index = layer.open({
+					type : 2,
+					title : title,
+					content : url
+				});
+				layer.full(index);
+			} */
 		/*用户-添加*/
-		function member_add(title, url, w, h) {
+
+		/* function member_add(title, url, w, h) {
 			layer_show(title, url, w, h);
-		}
+		} */
 	</script>
 
 </body>

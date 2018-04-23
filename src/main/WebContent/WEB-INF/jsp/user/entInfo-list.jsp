@@ -16,8 +16,9 @@ p, p>a {
 <body>
 
 	<div class="cl pd-5 bg-1 bk-gray text-c">
-		<form action="/sys_edu/list/indInfo-search">
-			<span class="select-box inline"> <select name="ind_id">
+		<form action="/sys_edu/list/entInfo-list">
+			<span class="select-box inline"> <select name="ind_id"
+				id="selectInd">
 					<option value="">所有行业</option>
 					<c:forEach items="${ind}" var="c" varStatus="st">
 						<option value="${c.ind_id}">${c.ind_name}</option>
@@ -34,7 +35,7 @@ p, p>a {
 
 		<c:forEach items="${info}" var="c" varStatus="st">
 			<div style="margin: 1px, 0px, 1px, 0px">
-				<a href="/sys_edu/list/entInfo-show?id=${c.ent_id}">${c.ent_name }</a>
+				<a href="/sys_edu/list/entInfo-show/${c.ent_id}">${c.ent_name }</a>
 				<p>${c.ent_phone }&nbsp&nbsp&nbsp&nbsp${c.ent_add}</p>
 			</div>
 
@@ -57,5 +58,29 @@ p, p>a {
 
 
 	<%@include file="/WEB-INF/jsp/include/_footer.jsp"%>
+	<script type="text/javascript">
+		$(function() {
+			ind_id = "${ind_id}";
+
+			/* 	匹配不上默认第一个 */
+			$("#selectInd>option").each(function() {
+				if ($(this).val() == ind_id) {
+					this.selected = "selected";
+				}
+			});
+			$("#selectInd>option").each(function() {
+				if ($(this).val() == type) {
+					this.selected = "selected";
+				}
+			});
+
+		});
+
+		$("#selectInd").change(function() {
+			var ind_id = $("#selectInd>option:selected").val();
+			var url = "/sys_edu/list/entInfo-list?ind_id=" + ind_id;
+			$(location).attr('href', url);
+		})
+	</script>
 </body>
 </html>

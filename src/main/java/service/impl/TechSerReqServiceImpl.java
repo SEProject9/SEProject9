@@ -76,7 +76,8 @@ public class TechSerReqServiceImpl implements TechSerReqService {
 
 	@Override
 	public boolean changeInfo(TechSerReq req) {
-		// TODO Auto-generated method stub
+		if (1 == reqMapper.update(req))
+			return true;
 		return false;
 	}
 
