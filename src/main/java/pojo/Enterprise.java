@@ -2,7 +2,7 @@ package pojo;
 
 public class Enterprise {
 	private Integer ent_id;
-	private String ent_acount;
+	private String ent_account;
 	private String ent_password;
 	private Integer admin_id;
 	private Integer state;
@@ -15,12 +15,12 @@ public class Enterprise {
 		this.ent_id = ent_id;
 	}
 
-	public String getEnt_acount() {
-		return ent_acount;
+	public String getEnt_account() {
+		return ent_account;
 	}
 
-	public void setEnt_acount(String ent_acount) {
-		this.ent_acount = ent_acount;
+	public void setEnt_account(String ent_acount) {
+		this.ent_account = ent_acount;
 	}
 
 	public String getEnt_password() {

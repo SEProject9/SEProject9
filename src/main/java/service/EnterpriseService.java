@@ -6,11 +6,11 @@ import pojo.Enterprise;
 
 public interface EnterpriseService {
 
-	Enterprise login(Enterprise ent);
+	Enterprise login(String account,String password);
 
 	boolean signupSave(Enterprise ent);
 
-	boolean signupCheck(Enterprise ent);
+	boolean checkAccount(String account);
 
 	boolean delete(int id);
 
@@ -25,5 +25,6 @@ public interface EnterpriseService {
 	List<Enterprise> search(Enterprise ent);
 
 	Enterprise getById(Integer id);
+
 
 }

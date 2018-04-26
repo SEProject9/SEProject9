@@ -2,6 +2,8 @@ package controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,7 +48,7 @@ public class ListAll {
 	@Autowired
 	EnterpriseInfoService entInfoSer;
 
-	@RequestMapping("entInfo-list")
+	@RequestMapping({ "entInfo-list", "entInfo-search" })
 	public ModelAndView entInfoList(Page page, EnterpriseInfo entInfo) {
 		ModelAndView mav = new ModelAndView();
 		PageHelper.offsetPage(page.getStart(), 20);
@@ -105,14 +107,20 @@ public class ListAll {
 	}
 
 	@RequestMapping("techSer-list")
-	public ModelAndView techSerList(Page page, @RequestParam(value = "type", required = false) Integer type,
-			@RequestParam(value = "state", required = false) Integer state,
-			@RequestParam(value = "ent_id", required = false) Integer ent_id) {
+	public ModelAndView techSerList(Page page, Integer type, Integer state, HttpSession session) {
 
 		ModelAndView mav = new ModelAndView();
 		PageHelper.offsetPage(page.getStart(), 20);// 只能针对一张表 不能两表共查
 		int total;
 
+		Enterprise ent = (Enterprise) session.getAttribute("user");
+		if (null == ent) {
+			mav.addObject("msg", "请进行登录");
+			mav.setViewName("fore/error");
+			return mav;
+		}
+
+		Integer ent_id = ent.getEnt_id();
 		if (null != type && 2 == type) {
 			System.out.println("req");
 			List<TechSerReq> req = reqSer.listByEnt(state, ent_id);
@@ -128,7 +136,6 @@ public class ListAll {
 		// 放入jsp路径
 		mav.addObject("state", state);
 		mav.addObject("type", type);
-		mav.addObject("ent_id", ent_id);
 		mav.setViewName("user/techSer-list");
 		return mav;
 	}
@@ -194,10 +201,11 @@ public class ListAll {
 	}
 
 	@RequestMapping("indData-search")
-	public ModelAndView indDataSearch(Page page, TechSerReq req) {
+	public ModelAndView indDataSearch(Page page, @RequestParam("ind_id") Integer id,
+			@RequestParam("title") String title) {
 		ModelAndView mav = new ModelAndView();
 		PageHelper.offsetPage(page.getStart(), 20);
-		List<TechSerReq> info = reqSer.searchByUser(req);
+		List<IndustryData> info = indDataSer.list(id, title);
 		int total = (int) new PageInfo<>(info).getTotal();
 
 		page.caculateLast(total);
@@ -252,11 +260,13 @@ public class ListAll {
 		return mav;
 	}
 
-	@RequestMapping("entInfo-show/{id}")
-	public ModelAndView entInfoShow(@PathVariable Integer id) {
+	/*0:游客
+	其他值(自身或其他企业信息)*/
+	@RequestMapping(value = "entInfo-show/{id}")
+	public ModelAndView entInfoShow(@PathVariable Integer id, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		if (null == id) {
-			mav.addObject("msg", "不存在该企业");
+		if (null == id || id.equals("") || 0 == id) {
+			mav.addObject("msg", "请进行登录");
 			mav.setViewName("fore/error");
 			return mav;
 		}

@@ -16,7 +16,7 @@ p, p>a {
 <body>
 
 	<div class="cl pd-5 bg-1 bk-gray text-c">
-		<form action="/sys_edu/list/entInfo-list">
+		<form action="/sys_edu/list/entInfo-search">
 			<span class="select-box inline"> <select name="ind_id"
 				id="selectInd">
 					<option value="">所有行业</option>
@@ -24,7 +24,7 @@ p, p>a {
 						<option value="${c.ind_id}">${c.ind_name}</option>
 					</c:forEach>
 			</select>
-			</span> <input type="text" name="title" id="" value="" placeholder=" 标题"
+			</span> <input type="text" name="ent_name" id="" value="" placeholder=" 标题"
 				style="width: 250px" class="input-text">
 			<button name="" id="" class="btn btn-success" type="submit">
 				<i class="Hui-iconfont">&#xe665;</i> 搜索
@@ -68,12 +68,6 @@ p, p>a {
 					this.selected = "selected";
 				}
 			});
-			$("#selectInd>option").each(function() {
-				if ($(this).val() == type) {
-					this.selected = "selected";
-				}
-			});
-
 		});
 
 		$("#selectInd").change(function() {

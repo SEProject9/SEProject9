@@ -23,9 +23,6 @@
 	</div>
 
 
-
-
-
 	<%@include file="/WEB-INF/jsp/include/_footer.jsp"%>
 	<script type="text/javascript">
 		

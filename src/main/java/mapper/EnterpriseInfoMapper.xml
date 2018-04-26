@@ -6,9 +6,9 @@
 <mapper namespace="mapper.EnterpriseInfoMapper">
 	<insert id="add" parameterType="EnterpriseInfo">
 		insert into enterprise_info_list
-		(ind_id, ent_name,ent_num,ent_add,ent_phone,ent_text)
+		(ent_id,ind_id, ent_name,ent_num,ent_add,ent_phone,ent_text)
 		values
-		(#{ind_id},#{ent_name},#{ent_num},
+		(#{ent_id},#{ind_id},#{ent_name},#{ent_num},
 		#{ent_add},#{ent_phone},#{ent_text})
 	</insert>
 
@@ -26,22 +26,25 @@
 		update enterprise_info_list
 		<trim prefix="SET" suffixOverrides=",">
 			<if test="ent_name!=null">
-				ent_name=#{ent_name}
+				ent_name=#{ent_name},
 			</if>
 			<if test="ent_num!=null">
-				ent_num=#{ent_num}
+				ent_num=#{ent_num},
 			</if>
 			<if test="ent_add!=null">
-				ent_add=#{ent_add}
+				ent_add=#{ent_add},
 			</if>
 			<if test="ent_add!=null">
-				ent_add=#{ent_add}
+				ent_add=#{ent_add},
 			</if>
 			<if test="ent_phone!=null">
-				ent_phone=#{ent_phone}
+				ent_phone=#{ent_phone},
 			</if>
 			<if test="ent_text!=null">
-				ent_text=#{ent_text}
+				ent_text=#{ent_text},
+			</if>
+			<if test="ind_id!=null">
+				ind_id=#{ind_id}
 			</if>
 		</trim>
 		where ent_id=#{ent_id}

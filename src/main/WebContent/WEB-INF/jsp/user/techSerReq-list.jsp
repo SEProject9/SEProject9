@@ -15,10 +15,13 @@ p {
 </head>
 <body>
 	<div class="cl pd-5 bg-1 bk-gray ">
-		<span class="l"><a class="btn btn-primary radius"
+		<span class="l">
+		<c:if test="${null!=sessionScope.user }">
+		<a class="btn btn-primary radius"
 			data-title="添加" href="javascript:;"
 			onclick="techSer_add('添加用户','/sys_edu/user/techSerReq-add')"><i
-				class="Hui-iconfont">&#xe600;</i> 添加</a></span>
+				class="Hui-iconfont">&#xe600;</i> 添加</a>
+				</c:if></span>
 		<div class="text-c">
 			<form action="/sys_edu/list/techSerReq-search">
 				<span class="select-box inline"> <select name="ind_id">

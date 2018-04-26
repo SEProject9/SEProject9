@@ -5,13 +5,16 @@
 </head>
 <body>
 	<div class="cl pd-5 bg-1 bk-gray">
-		<span class="l"><a class="btn btn-primary radius"
-			data-title="删除" data-href="techSerReq-del"
-			href="/sys_edu/user/techSer-del?type=req&id=${info.req_id}"><i
-				class="Hui-iconfont">&#xe6a1;</i> 删除</a>&nbsp&nbsp<a
-			class="btn btn-primary radius" data-title="编辑" href="javascript:;"
-			onclick="techSer_edit('编辑','/sys_edu/user/techSerReq-add?type=req&id=${info.req_id}')"><i
-				class="Hui-iconfont">&#xe6df;</i> 编辑</a></span>
+		<span class="l"> <c:if
+				test="${session.Scope.user.ent_id.equals(info.ent_id)}">
+				<a class="btn btn-primary radius" data-title="删除"
+					data-href="techSerReq-del"
+					href="/sys_edu/user/techSer-del?type=req&id=${info.req_id}"><i
+					class="Hui-iconfont">&#xe6a1;</i> 删除</a>&nbsp&nbsp<a
+					class="btn btn-primary radius" data-title="编辑" href="javascript:;"
+					onclick="techSer_edit('编辑','/sys_edu/user/techSerReq-add?type=req&id=${info.req_id}')"><i
+					class="Hui-iconfont">&#xe6df;</i> 编辑</a>
+			</c:if></span>
 	</div>
 	msg:${msg}
 	<c:if test="null!=${msg}">
@@ -26,15 +29,7 @@
 	${entInfo.ent_name}
 	</c:if>
 		${info.req_date }<br /> ${info.req_text }<br />
-
-
-
-
 	</div>
-
-
-
-
 
 	<%@include file="/WEB-INF/jsp/include/_footer.jsp"%>
 	<script type="text/javascript">
@@ -43,7 +38,10 @@
 				type : 2,
 				title : title,
 				content : url,
-				area : [ '1000px', '550px' ]
+				area : [ '1000px', '550px' ],
+				end: function () {		//!!!只要弹窗销毁就会执行
+	                location.reload();
+	            }
 			});
 		}
 	</script>

@@ -12,8 +12,9 @@
 	<header class="navbar-wrapper">
 		<div class="navbar navbar-fixed-top">
 			<div class="container-fluid cl">
-				<a class="logo navbar-logo f-l mr-10 hidden-xs" href=" /sys_edu/admin/login">H-ui.admin</a>
-				<a class="logo navbar-logo-m f-l mr-10 visible-xs" href="index.html">H-ui</a>
+				<a class="logo navbar-logo f-l mr-10 hidden-xs"
+					href=" /sys_edu/admin/login">H-ui.admin</a> <a
+					class="logo navbar-logo-m f-l mr-10 visible-xs" href="index.html">H-ui</a>
 				<span class="logo navbar-slogan f-l mr-10 hidden-xs">v3.1</span> <a
 					aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs"
 					href="javascript:;">&#xe667;</a>
@@ -36,10 +37,10 @@
 					class="nav navbar-nav navbar-userbar hidden-xs">
 					<ul class="cl">
 						<li class="dropDown dropDown_hover"><a href="#"
-							class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
+							class="dropDown_A">user <i class="Hui-iconfont">&#xe6d5;</i></a>
 							<ul class="dropDown-menu menu radius box-shadow">
-								<li><a href="Admin/logout">切换账户</a></li>
-								<li><a href="Admin/logout">退出</a></li>
+								<li><a href="/sys_edu/user/logout">切换账户</a></li>
+								<li><a href="/sys_edu/user/logout">退出</a></li>
 							</ul></li>
 						<li id="Hui-msg"><a href="#" title="消息"><span
 								class="badge badge-danger">1</span><i class="Hui-iconfont"
@@ -73,7 +74,7 @@
 						<li><a data-href="/sys_edu/list/entInfo-list"
 							data-title="其他企业" href="javascript:;">其他企业</a></li>
 						<li><a
-							data-href="/sys_edu/list/entInfo-show/${session.user.ent_id}"
+							data-href="/sys_edu/list/entInfo-show/${null==sessionScope.user?0:sessionScope.user.ent_id}"
 							data-title="我的企业" href="javascript:void(0)">我的企业</a></li>
 					</ul>
 				</dd>

@@ -4,7 +4,15 @@
 <%@include file="/WEB-INF/jsp/include/_meta.jsp"%>
 </head>
 <body>
-
+	<div class="cl pd-5 bg-1 bk-gray">
+		<span class="l"> <c:if
+				test="${session.Scope.user.ent_id.equals(info.ent_id)}">
+				<a class="btn btn-primary radius" data-title="编辑"
+					href="javascript:;"
+					onclick="entInfo_edit('编辑','/sys_edu/user/entInfo-add/${null==sessionScope.user?0:sessionScope.user.ent_id}')"><i
+					class="Hui-iconfont">&#xe6df;</i> 编辑</a>
+			</c:if></span>
+	</div>
 
 	<c:if test="null!=${msg}">
 	${msg}
@@ -24,7 +32,17 @@
 
 	<%@include file="/WEB-INF/jsp/include/_footer.jsp"%>
 	<script type="text/javascript">
-		
+	function entInfo_edit(title, url) {
+		var index = layer.open({
+			type : 2,
+			title : title,
+			content : url,
+			area : [ '1000px', '580px' ],
+			end: function () {		//!!!只要弹窗销毁就会执行
+                location.reload();
+            }
+		});
+	}
 	</script>
 </body>
 </html>

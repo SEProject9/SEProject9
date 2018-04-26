@@ -16,7 +16,8 @@ public class EnterpriseInfoServiceImpl implements EnterpriseInfoService {
 
 	@Override
 	public boolean add(EnterpriseInfo ei) {
-		// TODO Auto-generated method stub
+		if (1 == entInfoMapper.add(ei))
+			return true;
 		return false;
 	}
 
@@ -50,7 +51,8 @@ public class EnterpriseInfoServiceImpl implements EnterpriseInfoService {
 
 	@Override
 	public boolean update(EnterpriseInfo ei) {
-		// TODO Auto-generated method stub
+		if (1 == entInfoMapper.update(ei))
+			return true;
 		return false;
 	}
 

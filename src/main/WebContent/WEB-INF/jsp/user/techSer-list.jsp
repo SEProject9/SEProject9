@@ -113,7 +113,7 @@ p {
 					var type = $("#selectType>option:selected").val();
 					console.info(state);
 					var url = "/sys_edu/list/techSer-list?state=" + state
-							+ "&type=" + type + "&ent_id=" + "${ent_id}";
+							+ "&type=" + type ;
 					$(location).attr('href', url);
 				})
 	</script>

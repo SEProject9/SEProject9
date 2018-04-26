@@ -25,12 +25,12 @@
 		update enterprise_list
 		<trim prefix="SET" suffixOverrides=",">
 			<if test="ent_password!=null">
-				ent_password=#{ent_password}
+				ent_password=#{ent_password},
 			</if>
 			<if test="admin_id!=null">
-				admin_id=#{admin_id}
+				admin_id=#{admin_id},
 			</if>
-			<if test="state!=null">
+			<if test="state!=null and state!='' or state==0">
 				state=#{state}
 			</if>
 		</trim>
@@ -45,7 +45,7 @@
 			<if test="admin_id!=null">
 				and admin_id=#{admin_id}
 			</if>
-			<if test="state!=null">
+			<if test="state!=null and state!='' or state==0">
 				and state=#{state}
 			</if>
 		</trim>
