@@ -84,7 +84,6 @@
 	<script type="text/javascript">
 		$(function() {
 			var entInfo = ${entInfo};
-			alert(entInfo);
 			if (null == entInfo)
 				return;
 			console.info(entInfo);

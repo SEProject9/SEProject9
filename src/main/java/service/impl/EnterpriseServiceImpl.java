@@ -48,9 +48,9 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 		if (null == account || account.equals(""))
 			return false;
 		Enterprise ent = this.searchByAccount(account);
-		if (null != ent)// 存在该帐号
-			return false;
-		return true;
+		if (null == ent)// 存在该帐号
+			return true;
+		return false;
 	}
 
 	@Override

@@ -1,17 +1,18 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@include file="/WEB-INF/jsp/include/_meta.jsp"%>
+﻿<%@include file="/WEB-INF/jsp/include/_meta.jsp"%>
 </head>
 <body>
 	<div class="page-container">
 		<p class="f-20 text-success">
-			欢迎使用H-ui.admin <span class="f-14">v3.1</span>后台模版！
+			<c:if test="${null!=sessionScope.user}">${sessionScope.entInfo.ent_name}</c:if>
+			<span class="f-14">欢迎使用我</span>
 		</p>
-		<p>登录次数：18</p>
-		<p>上次登录IP：222.35.131.79.1 上次登录时间：2014-6-14 11:19:55</p>
-		<table class="table table-border table-bordered table-bg">
+		<c:if test="${null!=sessionScope.user}">
+			<p>登录次数：${sessionScope.count}</p>
+		</c:if>
+
+		<p>上次登录IP：202.35.131.79.1 上次登录时间：2018-5-1 11:19:55</p>
+		<table style="display: none"
+			class="table table-border table-bordered table-bg">
 			<thead>
 				<tr>
 					<th colspan="7" scope="col">信息统计</th>

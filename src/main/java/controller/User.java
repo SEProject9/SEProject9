@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.github.pagehelper.util.StringUtil;
+
 import pojo.Enterprise;
 import pojo.EnterpriseInfo;
 import pojo.Industry;
@@ -57,16 +59,23 @@ public class User {
 	}
 
 	@RequestMapping("login")
-	public ModelAndView login(String account, String password, HttpSession session) {
+	public ModelAndView login(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		Enterprise ent = entSer.login(account, password);
-		if (null == ent) {
+		Enterprise ent = (Enterprise) session.getAttribute("user");
+		if (null == ent || null == ent.getEnt_id()) {
 			mav.setViewName("login");
 			mav.addObject("msg", "false");
 			return mav;
 		}
-		session.setAttribute("user", ent);
-		mav.addObject("ent", ent);
+		Integer count = (Integer) session.getAttribute("count");
+		if (count == null)
+			count = 0;
+		count++;
+		session.setAttribute("count", count);
+
+		Integer ent_id = ent.getEnt_id();
+		EnterpriseInfo entInfo = entInfoSer.show(ent_id);
+		session.setAttribute("entInfo", entInfo);
 		mav.setViewName("user/index");
 		return mav;
 	}
@@ -77,15 +86,24 @@ public class User {
 		return "login";
 	}
 
+	@RequestMapping("error")
+	public String errorPage() {
+		return "fore/error";
+	}
+
 	/*检查账户以及公司重复
 	返回 account:true/false 
 	name:true/false*/
 	@ResponseBody
 	@RequestMapping("checkAcccount")
-	public String check(String account) {
-		boolean flag = entSer.checkAccount(account);
+	public String check(String account, String password, HttpSession session) {
 		CallBackResult cb = new CallBackResult();
-		cb.setSuccess(flag);
+		Enterprise ent = entSer.login(account, password);
+		if (null != ent) {
+			cb.setSuccess(true);
+			session.setAttribute("user", ent);
+		} else
+			cb.setSuccess(false);
 		return JSONObject.fromObject(cb).toString();
 	}
 
@@ -93,6 +111,7 @@ public class User {
 	@RequestMapping("signup")
 	public String signup(Enterprise ent) {
 		boolean flag = entSer.signupSave(ent);
+		System.out.println("sign:"+flag);
 		if (flag)
 			return "success";
 		return "false";

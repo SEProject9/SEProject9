@@ -1,7 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@include file="/WEB-INF/jsp/include/_meta.jsp"%>
+﻿<%@include file="/WEB-INF/jsp/include/_meta.jsp"%>
 <link href="/sys_edu/static/h-ui.admin/css/H-ui.login.css"
 	rel="stylesheet" type="text/css" />
 </head>
@@ -44,9 +41,9 @@
 				</div>
 				<div class="row cl">
 					<div class="formControls col-xs-8 col-xs-offset-3">
-						<input name="" type="submit" class="btn btn-success radius size-L"
-							value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;"> <input
-							style="display: none" name="" type="reset"
+						<button name="" id="submit_button" type="button"
+							class="btn btn-success radius size-L">&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp</button>
+						<input style="display: none" name="" type="reset"
 							class="btn btn-default radius size-L"
 							value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;"> <input
 							name="" type="button" class="btn btn-default radius size-L"
@@ -73,15 +70,33 @@
 				btn : [ '明白了', '知道了', '哦' ]
 			});
 		}) */
+		$("#submit_button").click(function(){
+			var data=$("form").serialize();
+			$.ajax({
+				url:"/sys_edu/user/checkAcccount",
+				data:data,
+				type:"post",
+				dataType:"json",
+				success:function(data){
+					console.info(data.success);
+					if(data.success){
+						window.location.href="/sys_edu/user/login";
+					}else{
+						layer.msg("账户/密码错误");
+					}
+				}
+			})
+				
+		});
 		$("#signup").click(function() {
 			var index = layer.open({
 				type : 2,
 				title : "注册",
 				content : "/sys_edu/user/signupPage",
 				area : [ '500px', '300px' ],
-				end: function () {		//!!!只要弹窗销毁就会执行
-	                location.reload();
-	            }
+				end : function() { //!!!只要弹窗销毁就会执行
+					location.reload();
+				}
 			});
 		});
 	</script>

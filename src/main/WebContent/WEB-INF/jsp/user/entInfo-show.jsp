@@ -6,7 +6,7 @@
 <body>
 	<div class="cl pd-5 bg-1 bk-gray">
 		<span class="l"> <c:if
-				test="${session.Scope.user.ent_id.equals(info.ent_id)}">
+				test="${sessionScope.user.ent_id.equals(info.ent_id)}">
 				<a class="btn btn-primary radius" data-title="编辑"
 					href="javascript:;"
 					onclick="entInfo_edit('编辑','/sys_edu/user/entInfo-add/${null==sessionScope.user?0:sessionScope.user.ent_id}')"><i

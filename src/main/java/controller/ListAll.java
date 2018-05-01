@@ -107,7 +107,7 @@ public class ListAll {
 	}
 
 	@RequestMapping("techSer-list")
-	public ModelAndView techSerList(Page page, Integer type, Integer state, HttpSession session) {
+	public ModelAndView techSerList(Page page, Integer ent_id, Integer type, Integer state, HttpSession session) {
 
 		ModelAndView mav = new ModelAndView();
 		PageHelper.offsetPage(page.getStart(), 20);// 只能针对一张表 不能两表共查
@@ -120,7 +120,8 @@ public class ListAll {
 			return mav;
 		}
 
-		Integer ent_id = ent.getEnt_id();
+		if (null == ent_id)// 该为查看自己的发布,否则为查看其他企业发布
+			ent_id = ent.getEnt_id();
 		if (null != type && 2 == type) {
 			System.out.println("req");
 			List<TechSerReq> req = reqSer.listByEnt(state, ent_id);
@@ -134,6 +135,7 @@ public class ListAll {
 
 		page.caculateLast(total);
 		// 放入jsp路径
+		mav.addObject("ent_id", ent_id);
 		mav.addObject("state", state);
 		mav.addObject("type", type);
 		mav.setViewName("user/techSer-list");

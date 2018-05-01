@@ -27,9 +27,9 @@
 			</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
-	<mvc:default-servlet-handler />
+	<mvc:default-servlet-handler /><!-- 静态资源费访问设置 -->
 
-
+<!-- 视图解析器 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"

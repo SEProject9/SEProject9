@@ -8,14 +8,14 @@
 		<form  method="post"
 			class="form form-horizontal" id="form-bill-add">
 			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3">账户：</label>
+				<label class="form-label col-xs-2 col-sm-3">账户：</label>
 				<div class="formControls col-xs-8 col-sm-4">
 					<input type="text" class="input-text" value="" placeholder=""
 						id="account" name="ent_account">
 				</div>
 			</div>
 			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3">密码：</label>
+				<label class="form-label col-xs-2 col-sm-3">密码：</label>
 				<div class="formControls col-xs-8 col-sm-4">
 					<input type="text" class="input-text" value="" placeholder=""
 						id="password" name="ent_password">
@@ -54,13 +54,15 @@
 					$(form).ajaxSubmit({
 						url:"/sys_edu/user/signup",
 						success:function(data) {
-							alert("success1:"+data);
 							if(null!=data&&data=="success"){
 								/* alert("data.success"+data); */
 								layer.msg('注册成功', {
 									icon : 1,
 									time : 1000
 								});
+								setTimeout(function(){window.parent.location.reload();
+								var index = parent.layer.getFrameIndex(window.name);
+								parent.layer.close(index)},2000);
 							}
 							else{
 								/* alert("data.err"+data); */
@@ -72,6 +74,8 @@
 							/* 	window.parent.location.reload();
 								var index = parent.layer.getFrameIndex(window.name);
 								parent.layer.close(index); */
+								
+								
 							}
 						},
 						error : function(data) {

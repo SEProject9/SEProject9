@@ -73,7 +73,7 @@ public class TouristAndCodeFilter implements Filter {
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
 
-		list.add("search");
+//		list.add("search");前台已经进行限制
 	}
 
 }

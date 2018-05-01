@@ -18,7 +18,7 @@
 	${entInfo.ent_name}
 	</c:if>
 		<a href="${info.url}">${info.source}</a>&nbsp&nbsp${info.ind_date}<br />
-		<br /> ${info.text }<br />
+		<br /> ${info.text }<br /><!-- 原先为路径,经过service层后改为txt读入的数据 -->
 
 
 

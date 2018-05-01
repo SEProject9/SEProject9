@@ -23,7 +23,7 @@ p {
 				class="Hui-iconfont">&#xe600;</i> 添加</a>
 				</c:if></span>
 		<div class="text-c">
-			<form action="/sys_edu/list/techSerReq-search">
+			<form id="search_form" action="/sys_edu/list/techSerReq-search">
 				<span class="select-box inline"> <select name="ind_id">
 						<option value="">所有行业</option>
 						<c:forEach items="${ind}" var="c" varStatus="st">
@@ -32,7 +32,7 @@ p {
 				</select>
 				</span> <input type="text" name="req_title" id="" value=""
 					placeholder=" 标题" style="width: 250px" class="input-text">
-				<button name="" id="" class="btn btn-success" type="submit">
+				<button name="" id="search_btn" class="btn btn-success" type="button">
 					<i class="Hui-iconfont">&#xe665;</i> 搜索
 				</button>
 			</form>
@@ -76,6 +76,14 @@ p {
 				area : [ '1000px', '550px' ]
 			});
 		}
+		$("#search_btn").click(function() {
+			user =" ${sessionScope.user}";
+			if (null == user||user.trim()=="")
+				layer.msg("请先登录");
+			else{
+				$("#search_form").submit();
+			}
+		});
 	</script>
 </body>
 </html>

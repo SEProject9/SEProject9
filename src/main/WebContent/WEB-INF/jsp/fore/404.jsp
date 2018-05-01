@@ -5,14 +5,9 @@
 </head>
 <body>
 
-		
-		<h1 align="center" style="margin-top: 100px; font-size: 70px">
-		<c:choose>
-		<c:when test="${msg.equals('请进行登录')}"><a style="text-decoration: none;color: black" href="/sys_edu/user/index">${msg}</a></c:when>
-		<c:otherwise>${msg}</c:otherwise>
-		</c:choose>
-		</h1>
-			<h3 align="center">error${type }</h3>
+			<h1 align="center" style="margin-top: 100px; font-size: 200px">404</h1>
+			<h3 align="center">未能找到您访问的资源。</h3>
+
 	<br /> 
 	<br>
 

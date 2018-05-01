@@ -16,7 +16,7 @@ p {
 <body>
 	<div class="cl pd-5 bg-1 bk-gray ">
 		<c:if
-			test="${session.user.ent_id!=null&&session.user.ent_id.equals(ent_id)}">判断是否查看自己企业&是否登录
+			test="${sessionScope.user.ent_id!=null&&sessionScope.user.ent_id.equals(ent_id)}">
 			<span class="l"><a class="btn btn-primary radius"
 				data-title="添加" href="javascript:;"
 				onclick="techSer_add('发布需求','/sys_edu/user/techSerReq-add')"><i
@@ -111,9 +111,8 @@ p {
 				function() {
 					var state = $("#selectState>option:selected").val();
 					var type = $("#selectType>option:selected").val();
-					console.info(state);
 					var url = "/sys_edu/list/techSer-list?state=" + state
-							+ "&type=" + type ;
+							+ "&type=" + type+"&ent_id="+${ent_id} ;
 					$(location).attr('href', url);
 				})
 	</script>

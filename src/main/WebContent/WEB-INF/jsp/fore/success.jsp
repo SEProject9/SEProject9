@@ -4,9 +4,10 @@
 <%@include file="/WEB-INF/jsp/include/_meta.jsp"%>
 <%@ page isELIgnored="false" %>
 </head>
-<body>消息:${msg}
-type:${type }
+<body>
 <br/>
-success
+<h1 align="center" style="margin-top: 100px; font-size: 70px">${msg}</h1>
+			<h3 align="center">success${type }</h3>
+
 </body>
 </html>

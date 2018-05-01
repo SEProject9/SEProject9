@@ -88,8 +88,10 @@
 					<ul>
 						<li><a data-href="/sys_edu/list/indInfo-list"
 							data-title="行业资讯" href="javascript:;">行业资讯</a></li>
-						<li><a data-href="/sys_edu/list/indData-list"
+						<li><a data-href="/sys_edu/list/indInfo-list"
 							data-title="行业数据" href="javascript:void(0)">行业数据</a></li>
+<!-- 						<li><a data-href="/sys_edu/list/indData-list"
+							data-title="行业数据" href="javascript:void(0)">行业数据</a></li> -->
 					</ul>
 				</dd>
 			</dl>

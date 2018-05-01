@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import mapper.IndustryInfoMapper;
 import pojo.IndustryInfo;
 import service.IndustryInfoService;
+import util.FileStreamUtil;
 
 @Service
 public class IndustryInfoServiceImpl implements IndustryInfoService {
@@ -16,7 +17,14 @@ public class IndustryInfoServiceImpl implements IndustryInfoService {
 
 	@Override
 	public IndustryInfo show(int id) {
-		return infoMapper.get(id);
+		IndustryInfo indInfo = infoMapper.get(id);
+		String txtUrl = indInfo.getText();
+		System.out.println(txtUrl);
+		if (null != txtUrl) {
+			StringBuffer txt=FileStreamUtil.readLogInfo(txtUrl);
+			indInfo.setText(txt.toString());
+		}
+		return indInfo;
 	}
 
 	@Override

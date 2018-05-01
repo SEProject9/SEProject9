@@ -15,7 +15,7 @@ p, p>a {
 </head>
 <body>
 	<div class="cl pd-5 bg-1 bk-gray text-c">
-		<form action="/sys_edu/list/indData-search">
+		<form id="search_form" action="/sys_edu/list/indData-search">
 			<span class="select-box inline"> <select name="ind_id">
 					<option value="">所有行业</option>
 					<c:forEach items="${ind}" var="c" varStatus="st">
@@ -24,7 +24,7 @@ p, p>a {
 			</select>
 			</span> <input type="text" name="title" id="" value="" placeholder=" 标题"
 				style="width: 250px" class="input-text">
-			<button name="" id="" class="btn btn-success" type="submit">
+			<button name="" id="search_btn" class="btn btn-success" type="button">
 				<i class="Hui-iconfont">&#xe665;</i> 搜索
 			</button>
 		</form>
@@ -56,5 +56,15 @@ p, p>a {
 
 
 	<%@include file="/WEB-INF/jsp/include/_footer.jsp"%>
+		<script type="text/javascript">
+		$("#search_btn").click(function() {
+			user =" ${sessionScope.user}";
+			if (null == user||user.trim()=="")
+				layer.msg("请先登录");
+			else{
+				$("#search_form").submit();
+			}
+		});
+	</script>
 </body>
 </html>
