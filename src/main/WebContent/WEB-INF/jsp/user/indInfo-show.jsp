@@ -4,11 +4,6 @@
 <%@include file="/WEB-INF/jsp/include/_meta.jsp"%>
 </head>
 <body>
-
-
-	<c:if test="null!=${msg}">
-	${msg}
-	</c:if>
 	<div style="width: 100%; margin: 2px auto; text-align: center">
 
 

@@ -2,7 +2,10 @@ package util;
 
 import java.io.*;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 
 public class FileStreamUtil {
 	 public static StringBuffer readLogInfo(String filePath) {
@@ -47,6 +50,18 @@ public class FileStreamUtil {
 	            }
 	        }
 	        return sb;
+	    }
+	 public static void displayPDF(HttpServletResponse response,String filePath) {
+	        try {
+	            File file = new File(filePath);
+	            FileInputStream fileInputStream = new FileInputStream(file);
+	            response.setHeader("Content-Disposition", "attachment;fileName=test.pdf");
+	            response.setContentType("multipart/form-data");
+	            OutputStream outputStream = response.getOutputStream();
+	            IOUtils.write(IOUtils.toByteArray(fileInputStream), outputStream);
+	        } catch(Exception e) {
+	            e.printStackTrace();
+	        }
 	    }
 	/* public static void main(String[] args) {
 		 StringBuffer s=new FileStreamUtil().readLogInfo("F://1.txt");

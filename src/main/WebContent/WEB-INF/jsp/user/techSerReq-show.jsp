@@ -2,11 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="/WEB-INF/jsp/include/_meta.jsp"%>
+
 </head>
 <body>
+<div style="display: none">sessionScope:${sessionScope.user.ent_id},
+info.ent_id:.${info.ent_id}</div>
 	<div class="cl pd-5 bg-1 bk-gray">
 		<span class="l"> <c:if
-				test="${session.Scope.user.ent_id.equals(info.ent_id)}">
+				test="${sessionScope.user.ent_id.equals(info.ent_id)}">
 				<a class="btn btn-primary radius" data-title="删除"
 					data-href="techSerReq-del"
 					href="/sys_edu/user/techSer-del?type=req&id=${info.req_id}"><i
@@ -16,10 +19,6 @@
 					class="Hui-iconfont">&#xe6df;</i> 编辑</a>
 			</c:if></span>
 	</div>
-	msg:${msg}
-	<c:if test="null!=${msg}">
-	${msg}
-	</c:if>
 	<div style="width: 500px; margin: auto; text-align: center">
 
 

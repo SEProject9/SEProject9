@@ -20,7 +20,7 @@ p {
 		<c:if test="${null!=sessionScope.user }">
 		<a class="btn btn-primary radius"
 			data-title="添加" href="javascript:;"
-			onclick="techSer_add('添加客户','/sys_edu/user/techSerSup-add')"><i
+			onclick="techSer_add('添加','/sys_edu/user/techSerSup-add')"><i
 				class="Hui-iconfont">&#xe600;</i> 添加</a></c:if></span>
 		<div class="text-c">
 			<form id="search_form" action="/sys_edu/list/techSerSup-search">
@@ -72,7 +72,10 @@ p {
 				type : 2,
 				title : title,
 				content : url,
-				area : [ '1000px', '550px' ]
+				area : [ '1000px', '550px' ],
+				end: function () {		//!!!只要弹窗销毁就会执行
+	                location.reload();
+	            }
 			});
 		}
 		$("#search_btn").click(function() {

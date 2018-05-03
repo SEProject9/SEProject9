@@ -19,11 +19,11 @@ p {
 			test="${sessionScope.user.ent_id!=null&&sessionScope.user.ent_id.equals(ent_id)}">
 			<span class="l"><a class="btn btn-primary radius"
 				data-title="添加" href="javascript:;"
-				onclick="techSer_add('发布需求','/sys_edu/user/techSerReq-add')"><i
-					class="Hui-iconfont">&#xe600;</i> 发布需求</a>&nbsp&nbsp&nbsp<a
-				class="btn btn-primary radius" data-title="添加" href="javascript:;"
 				onclick="techSer_add('发布供应','/sys_edu/user/techSerSup-add')"><i
-					class="Hui-iconfont">&#xe600;</i> 发布供应</a></span>
+					class="Hui-iconfont">&#xe600;</i> 发布供应</a>&nbsp&nbsp&nbsp<a
+				class="btn btn-primary radius" data-title="添加" href="javascript:;"
+				onclick="techSer_add('发布需求','/sys_edu/user/techSerReq-add')"><i
+					class="Hui-iconfont">&#xe600;</i> 发布需求</a></span>
 		</c:if>
 
 		<div class="text-c">
@@ -104,7 +104,10 @@ p {
 				type : 2,
 				title : title,
 				content : url,
-				area : [ '1000px', '550px' ]
+				area : [ '1000px', '550px' ],
+				end: function () {		//!!!只要弹窗销毁就会执行
+	                location.reload();
+	            }
 			});
 		}
 		$("#selectState,#selectType").change(
@@ -112,7 +115,7 @@ p {
 					var state = $("#selectState>option:selected").val();
 					var type = $("#selectType>option:selected").val();
 					var url = "/sys_edu/list/techSer-list?state=" + state
-							+ "&type=" + type+"&ent_id="+${ent_id} ;
+							+ "&type=" + type + "&ent_id=" + ${ent_id};
 					$(location).attr('href', url);
 				})
 	</script>

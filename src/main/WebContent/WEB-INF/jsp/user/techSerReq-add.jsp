@@ -6,7 +6,7 @@
 <body>
 	<article class="page-container">
 		<form action="/sys_edu/user/techSerReq-save" method="post"
-			class="form form-horizontal" id="form-bill-add">
+			class="form form-horizontal" id="search_form">
 			<input type="hidden" name="idName" value="bill_id" />
 			<!-- <div class="row cl" style="display: none">
 				<label class="form-label col-xs-4 col-sm-3"><span
@@ -77,12 +77,9 @@
 	<script type="text/javascript">
 		$(function() {
 			var techSer = ${techSer};
-			/* var techSer = JSON.parse("${techSer}"); */
-			if (null == techSer)
+			if (techSer=="add")
 				return;
-
 			console.info(techSer);
-
 			$("indSelect>option").each(function() {
 				if ($(this).val() == techSer.ind_id)
 					$(this).selected = "selected";
@@ -91,6 +88,12 @@
 			$("#title").attr("value", techSer.req_title);
 			$("#text").html(techSer.req_text);
 		});
+		
+		/* $("#search_btn").click(function() {
+				data=
+				
+		}); */
+		
 		/* 	$(function() {
 				$("#form-bill-add").validate({
 					rules : {

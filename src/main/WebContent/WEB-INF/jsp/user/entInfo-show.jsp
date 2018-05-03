@@ -13,10 +13,6 @@
 					class="Hui-iconfont">&#xe6df;</i> 编辑</a>
 			</c:if></span>
 	</div>
-
-	<c:if test="null!=${msg}">
-	${msg}
-	</c:if>
 	<div style="width: 100%; margin: 2px auto; text-align: center">
 
 		<h1>${info.ent_name }</h1>

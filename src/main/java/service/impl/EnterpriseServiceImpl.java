@@ -37,6 +37,8 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 		// 创建对应的企业信息 表上对应id
 		Enterprise temp = this.searchByAccount(ent.getEnt_account());
 		EnterpriseInfo entInfo = new EnterpriseInfo();
+		entInfo.setEnt_name(temp.getEnt_account());
+		entInfo.setEnt_add("广州海珠区");
 		entInfo.setEnt_id(temp.getEnt_id());
 		entInfo.setInd_id(1);//数据库nonull 要改的话麻烦 只能这里先默认了
 		entInfoMapper.add(entInfo);

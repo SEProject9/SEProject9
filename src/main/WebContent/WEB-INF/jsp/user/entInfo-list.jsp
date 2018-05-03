@@ -4,7 +4,7 @@
 <%@include file="/WEB-INF/jsp/include/_meta.jsp"%>
 <style type="text/css">
 a {
-	font-size: 16px;
+	font-size: 22px;
 	font-weight: normal;
 }
 
@@ -31,13 +31,14 @@ p, p>a {
 			</button>
 		</form>
 	</div>
-	<div style="width: 500px; margin: 4px auto; text-align: center">
-
+	<div style="width: 500px; margin: 2px auto; text-align: center">
 		<c:forEach items="${info}" var="c" varStatus="st">
-			<div style="margin: 1px, 0px, 1px, 0px">
+		<c:if test="${c.ent_id!=sessionScope.user.ent_id}">
+			<div style="margin-buttom: 1px">
 				<a href="/sys_edu/list/entInfo-show/${c.ent_id}">${c.ent_name }</a>
-				<p>${c.ent_phone }&nbsp&nbsp&nbsp&nbsp${c.ent_add}</p>
+				<p>${c.ent_add}</p>
 			</div>
+		</c:if>
 
 		</c:forEach>
 

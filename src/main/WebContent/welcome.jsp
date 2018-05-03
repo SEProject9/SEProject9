@@ -1,4 +1,25 @@
 ﻿<%@include file="/WEB-INF/jsp/include/_meta.jsp"%>
+<%@ page import="java.util.*"%>
+<script language="javascript"> 
+function realSysTime(clock){ 
+var now=new Date(); //创建Date对象 
+var year=now.getFullYear(); //获取年份 
+var month=now.getMonth(); //获取月份 
+var date=now.getDate(); //获取日期 
+var day=now.getDay(); //获取星期 
+var hour=now.getHours(); //获取小时 
+var minu=now.getMinutes(); //获取分钟 
+var sec=now.getSeconds(); //获取秒钟 
+month=month+1; 
+var arr_week=new Array("星期日","星期一","星期二","星期三","星期四","星期五","星期六"); 
+var week=arr_week[day]; //获取中文的星期 
+var time=year+"年"+month+"月"+date+"日 "+week+" "+hour+":"+minu+":"+sec; //组合系统时间 
+clock.innerHTML=time; //显示系统时间 
+} 
+window.onload=function(){ 
+window.setInterval("realSysTime(clock)",1000); //实时获取并显示系统时间 
+} 
+</script> 
 </head>
 <body>
 	<div class="page-container">
@@ -78,35 +99,27 @@
 			<tbody>
 				<tr>
 					<th width="30%">服务器计算机名</th>
-					<td><span id="lbServerName">http://127.0.0.1/</span></td>
+					<td><span id="lbServerName">http://47.106.137.93/</span></td>
 				</tr>
 				<tr>
 					<td>服务器IP地址</td>
-					<td>192.168.1.1</td>
-				</tr>
-				<tr>
-					<td>服务器域名</td>
-					<td>www.h-ui.net</td>
+					<td>47.106.137.93</td>
 				</tr>
 				<tr>
 					<td>服务器端口</td>
-					<td>80</td>
-				</tr>
-				<tr>
-					<td>服务器IIS版本</td>
-					<td>Microsoft-IIS/6.0</td>
+					<td>8080</td>
 				</tr>
 				<tr>
 					<td>本文件所在文件夹</td>
-					<td>D:\WebSite\HanXiPuTai.com\XinYiCMS.Web\</td>
+					<td>/home/admin/apache-tomcat-9.0.7</td>
 				</tr>
 				<tr>
 					<td>服务器操作系统</td>
-					<td>Microsoft Windows NT 5.2.3790 Service Pack 2</td>
+					<td>Debian 8.9</td>
 				</tr>
 				<tr>
 					<td>系统所在文件夹</td>
-					<td>C:\WINDOWS\system32</td>
+					<td>/</td>
 				</tr>
 				<tr>
 					<td>服务器脚本超时时间</td>
@@ -117,16 +130,8 @@
 					<td>Chinese (People's Republic of China)</td>
 				</tr>
 				<tr>
-					<td>.NET Framework 版本</td>
-					<td>2.050727.3655</td>
-				</tr>
-				<tr>
 					<td>服务器当前时间</td>
-					<td>2014-6-14 12:06:23</td>
-				</tr>
-				<tr>
-					<td>服务器IE版本</td>
-					<td>6.0000</td>
+					<td id="clock" />
 				</tr>
 				<tr>
 					<td>服务器上次启动到现在已运行</td>
@@ -134,19 +139,19 @@
 				</tr>
 				<tr>
 					<td>逻辑驱动器</td>
-					<td>C:\D:\</td>
+					<td>/</td>
 				</tr>
 				<tr>
 					<td>CPU 总数</td>
-					<td>4</td>
+					<td>1</td>
 				</tr>
 				<tr>
 					<td>CPU 类型</td>
-					<td>x86 Family 6 Model 42 Stepping 1, GenuineIntel</td>
+					<td>Intel(R) Xeon(R) CPU E5-2430 0 @ 2.20GHz</td>
 				</tr>
 				<tr>
 					<td>虚拟内存</td>
-					<td>52480M</td>
+					<td>2048M</td>
 				</tr>
 				<tr>
 					<td>当前程序占用内存</td>
@@ -166,7 +171,7 @@
 				</tr>
 				<tr>
 					<td>当前系统用户名</td>
-					<td>NETWORK SERVICE</td>
+					<td>admin</td>
 				</tr>
 			</tbody>
 		</table>

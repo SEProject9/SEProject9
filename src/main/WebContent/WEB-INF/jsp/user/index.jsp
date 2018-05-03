@@ -25,11 +25,11 @@
 								class="Hui-iconfont">&#xe6d5;</i></a>
 							<ul class="dropDown-menu menu radius box-shadow">
 								<li><a href="javascript:;"
-									onclick="techSer_add('添加用户','/sys_edu/user/techSerReq-add')"><i
-										class="Hui-iconfont">&#xe616;</i> 技术服务需求</a></li>
-								<li><a href="javascript:;"
-									onclick="techSer_add('添加客户','/sys_edu/user/techSerSup-add')"><i
+									onclick="techSer_add('添加','/sys_edu/user/techSerSup-add')"><i
 										class="Hui-iconfont">&#xe613;</i> 技术服务供应</a></li>
+								<li><a href="javascript:;"
+									onclick="techSer_add('添加','/sys_edu/user/techSerReq-add')"><i
+										class="Hui-iconfont">&#xe616;</i> 技术服务需求</a></li>
 							</ul></li>
 					</ul>
 				</nav>
@@ -37,7 +37,12 @@
 					class="nav navbar-nav navbar-userbar hidden-xs">
 					<ul class="cl">
 						<li class="dropDown dropDown_hover"><a href="#"
-							class="dropDown_A">user <i class="Hui-iconfont">&#xe6d5;</i></a>
+							class="dropDown_A">
+							<c:choose>
+							<c:when test="${null!=sessionScope.user}">${sessionScope.user.ent_account}</c:when>
+							<c:otherwise>游客</c:otherwise>
+							</c:choose>
+							<i class="Hui-iconfont">&#xe6d5;</i></a>
 							<ul class="dropDown-menu menu radius box-shadow">
 								<li><a href="/sys_edu/user/logout">切换账户</a></li>
 								<li><a href="/sys_edu/user/logout">退出</a></li>
@@ -72,7 +77,7 @@
 				<dd>
 					<ul>
 						<li><a data-href="/sys_edu/list/entInfo-list"
-							data-title="其他企业" href="javascript:;">其他企业</a></li>
+							data-title="其他企业" href="javascript:void(0);">其他企业</a></li>
 						<li><a
 							data-href="/sys_edu/list/entInfo-show/${null==sessionScope.user?0:sessionScope.user.ent_id}"
 							data-title="我的企业" href="javascript:void(0)">我的企业</a></li>
@@ -88,9 +93,9 @@
 					<ul>
 						<li><a data-href="/sys_edu/list/indInfo-list"
 							data-title="行业资讯" href="javascript:;">行业资讯</a></li>
-						<li><a data-href="/sys_edu/list/indInfo-list"
+						<li><a data-href="/sys_edu/list/indData-list"
 							data-title="行业数据" href="javascript:void(0)">行业数据</a></li>
-<!-- 						<li><a data-href="/sys_edu/list/indData-list"
+						<!-- 						<li><a data-href="/sys_edu/list/indData-list"
 							data-title="行业数据" href="javascript:void(0)">行业数据</a></li> -->
 					</ul>
 				</dd>
@@ -102,10 +107,10 @@
 				</dt>
 				<dd>
 					<ul>
-						<li><a data-href="/sys_edu/list/techSerReq-list"
-							data-title="技术与服务需求" href="javascript:;">技术与服务需求</a></li>
 						<li><a data-href="/sys_edu/list/techSerSup-list"
 							data-title="技术与服务提供" href="javascript:void(0)">技术与服务提供</a></li>
+						<li><a data-href="/sys_edu/list/techSerReq-list"
+							data-title="技术与服务需求" href="javascript:;">技术与服务需求</a></li>
 						<li><a data-href="/sys_edu/list/techSer-list"
 							data-title="个人发布" href="javascript:void(0)">个人发布</a></li>
 					</ul>
@@ -255,7 +260,20 @@
 				type : 2,
 				title : title,
 				content : url,
-				area : [ '1000px', '550px' ]
+				area : [ '1000px', '550px' ],
+				end: function () {		//!!!只要弹窗销毁就会执行
+	              /*   location.reload(); */
+	                $(".show_iframe").each(function(){
+	                    //判断每一个div，其css中display是否为block
+	                    if($(this).css("display")=="block"){
+	                    	/* alert($(this).children("iframe").attr("src")); */
+	                    	var src=$(this).children("iframe").attr("src");
+	                    	$(this).children("iframe").attr('src', src);
+	                    	/*  $(this).location.reload(true);  */
+	                    }
+	                });
+	               /*  document.getElementByTagName('iframe').contentWindow.location.reload(true); */
+	            }
 			});
 		}
 		/*图片-添加*/

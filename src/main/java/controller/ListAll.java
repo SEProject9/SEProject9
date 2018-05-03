@@ -1,9 +1,16 @@
 package controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +35,7 @@ import service.IndustryInfoService;
 import service.IndustryService;
 import service.TechSerReqService;
 import service.TechSerSupService;
+import util.FileStreamUtil;
 import util.Page;
 
 @Controller
@@ -58,6 +66,7 @@ public class ListAll {
 		page.caculateLast(total);
 
 		List<Industry> list1 = indSer.list();
+		System.out.println("entinfo:"+list1.size());
 		mav.addObject("ind_id", entInfo.getInd_id());
 		mav.addObject("ind", list1);
 		mav.addObject("info", info);
@@ -122,17 +131,19 @@ public class ListAll {
 
 		if (null == ent_id)// 该为查看自己的发布,否则为查看其他企业发布
 			ent_id = ent.getEnt_id();
+		System.out.println("entid:"+ent_id);
 		if (null != type && 2 == type) {
 			System.out.println("req");
 			List<TechSerReq> req = reqSer.listByEnt(state, ent_id);
 			total = (int) new PageInfo<>(req).getTotal();
 			mav.addObject("info", req);
+			System.out.println("list:"+req.size());
 		} else {
 			List<TechSerSup> sup = supSer.listByEnt(state, ent_id);
 			total = (int) new PageInfo<>(sup).getTotal();
 			mav.addObject("info", sup);
+			System.out.println("list:"+sup.size());
 		}
-
 		page.caculateLast(total);
 		// 放入jsp路径
 		mav.addObject("ent_id", ent_id);
@@ -298,32 +309,78 @@ public class ListAll {
 		/*EnterpriseInfo entInfo = entInfoSer.show(req.getEnt_id());
 		if (null != entInfo)
 			mav.addObject("entInfo", entInfo);*/
-		// 放入转发参数
+
 		mav.addObject("info", indInfo);
-		// 放入jsp路径
 		mav.setViewName("user/indInfo-show");
 		return mav;
 	}
 
 	@RequestMapping("indData-show")
+	public void indDataShow(@RequestParam("id") Integer id, HttpServletRequest request, HttpServletResponse response) {
+
+		IndustryData indData = indDataSer.show(id);
+		try {
+			if (null == indData) {
+				response.getOutputStream().print("no such record");
+				response.sendRedirect("sys_edu/WEB-INF/jsp/fore/error");
+			}
+			request.setAttribute("url", indData.getPicture());
+			request.getRequestDispatcher("/list/displayPDF").forward(request, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	@RequestMapping("displayPDF")
+	public void displayPDF(HttpServletRequest request, HttpServletResponse response) {
+		FileInputStream in = null;
+		OutputStream out = null;
+		try {
+			String url = (String) request.getAttribute("url");
+			if(null==url)
+				url="/home/admin/iresearch/报告.pdf";
+			response.setContentType("application/pdf");
+			in = new FileInputStream(new File(url));
+			out = response.getOutputStream();
+			byte[] b = new byte[512];
+			while ((in.read(b)) != -1) {
+				out.write(b);
+			}
+		} catch (Exception e) {
+
+		} finally {
+			try {
+				out.flush();
+				in.close();
+				out.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+	}
+
+	/*@RequestMapping("indData-show")
 	public ModelAndView indDataShow(@RequestParam("id") Integer id) {
 		ModelAndView mav = new ModelAndView();
-
+		System.out.println("hrere1");
 		IndustryData indData = indDataSer.show(id);
 		if (null == indData) {
 			mav.addObject("msg", "no such record!");
 			mav.setViewName("fore/error");
 			return mav;
 		}
-		/*EnterpriseInfo entInfo = entInfoSer.show(req.getEnt_id());
-		if (null != entInfo)
-			mav.addObject("entInfo", entInfo);*/
-		// 放入转发参数
+		// EnterpriseInfo entInfo = entInfoSer.show(req.getEnt_id());
+		// if (null != entInfo)
+		// mav.addObject("entInfo", entInfo);
+	
 		mav.addObject("info", indData);
-		// 放入jsp路径
 		mav.setViewName("user/indData-show");
 		return mav;
-	}
+	}*/
 
 	@RequestMapping("techSerReq-show")
 	public ModelAndView techSerReqShow(@RequestParam("id") Integer id) {

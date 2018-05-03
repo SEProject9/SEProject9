@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import net.sf.json.JSONObject;
 import javax.servlet.http.HttpServletRequest;
@@ -111,7 +112,6 @@ public class User {
 	@RequestMapping("signup")
 	public String signup(Enterprise ent) {
 		boolean flag = entSer.signupSave(ent);
-		System.out.println("sign:"+flag);
 		if (flag)
 			return "success";
 		return "false";
@@ -119,7 +119,6 @@ public class User {
 
 	@RequestMapping("entInfo-add/{id}")
 	public ModelAndView entInfoAdd(@PathVariable Integer id, HttpSession session) {
-		System.out.println("entInfoadd");
 		ModelAndView mav = new ModelAndView();
 		EnterpriseInfo entInfo = null;
 		Enterprise ent = (Enterprise) session.getAttribute("user");
@@ -139,12 +138,15 @@ public class User {
 	@RequestMapping("techSerReq-add")
 	public ModelAndView techSerReqAdd(@RequestParam(value = "id", required = false) Integer id) {
 		ModelAndView mav = new ModelAndView();
+		JSONObject json = null;
 		if (null != id) {
-			JSONObject json = JSONObject.fromObject(reqSer.show(id));
-			mav.addObject("techSer", json.toString());
+			json = JSONObject.fromObject(reqSer.show(id));
+		} else {
+			String objectStr = "{\"add\":\"add\"}";
+			json = JSONObject.fromObject(objectStr);
 		}
+		mav.addObject("techSer", json);
 		List<Industry> list = indSer.list();
-		System.out.println("reqlist:" + list.size());
 		mav.addObject("info", list);
 		mav.setViewName("user/techSerReq-add");
 		return mav;
@@ -153,12 +155,15 @@ public class User {
 	@RequestMapping("techSerSup-add")
 	public ModelAndView techSerSupAdd(@RequestParam(value = "id", required = false) Integer id) {
 		ModelAndView mav = new ModelAndView();
+		JSONObject json = null;
 		if (null != id) {
-			JSONObject json = JSONObject.fromObject(supSer.show(id));
-			mav.addObject("techSer", json);
+			json = JSONObject.fromObject(supSer.show(id));
+		} else {
+			String objectStr = "{\"add\":\"add\"}";
+			json = JSONObject.fromObject(objectStr);
 		}
+		mav.addObject("techSer", json);
 		List<Industry> list = indSer.list();
-		System.out.println("reqlist:" + list.size());
 		mav.addObject("info", list);
 		mav.setViewName("user/techSerSup-add");
 		return mav;
@@ -182,43 +187,50 @@ public class User {
 	}
 
 	@RequestMapping("techSerReq-save")
-	public ModelAndView techSerReqSave(TechSerReq req) {
+	public ModelAndView techSerReqSave(TechSerReq req, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		if (null != req.getReq_id()) {
-			if (!reqSer.changeInfo(req)) {
+			if (!reqSer.changeInfo(req)) {// 修改
 				mav.setViewName("fore/error");
 				return mav;
 			}
-		} else
-			req = reqSer.add(req);
+		} else {// 增加
+			Enterprise ent = (Enterprise) request.getSession().getAttribute("user");
+			req.setEnt_id(ent.getEnt_id());
 
-		if (null == req)
+			req = reqSer.add(req);// 返回的req是传入的:没有id
+		}
+
+		if (null == req) {
+			mav.addObject("msg", "no req");
 			mav.setViewName("fore/error");
-
+		}
+		req.setEnt_id(null);
 		mav.addObject("msg", "operation success!");
-		// 放入转发参数
 		mav.addObject("info", req);
-		// 放入jsp路径
 		mav.setViewName("user/techSerReq-show");
 		return mav;
 	}
 
 	@RequestMapping("techSerSup-save")
-	public ModelAndView techSerSupSave(TechSerSup sup) {
+	public ModelAndView techSerSupSave(TechSerSup sup, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
-		if (null != sup.getSup_id()) {
+		if (null != sup.getSup_id()) {// 修改
 			if (!supSer.changeInfo(sup)) {
 				mav.addObject("msg", "change info fail");
 				mav.setViewName("fore/error");
 				return mav;
 			}
-		} else
+		} else {// 增加
+			Enterprise ent = (Enterprise) request.getSession().getAttribute("user");
+			sup.setEnt_id(ent.getEnt_id());
 			sup = supSer.add(sup);
+		}
 		if (null == sup) {
 			mav.addObject("msg", "no sup");
 			mav.setViewName("fore/error");
 		}
-
+		sup.setEnt_id(null);
 		mav.addObject("msg", "operation success!");
 		// 放入转发参数
 		mav.addObject("info", sup);
@@ -236,7 +248,6 @@ public class User {
 		System.out.println(request.getRequestURI());
 		System.out.println(request.getRequestURL());
 		System.out.println(request.getHeader("Referer"));*/
-		System.out.println("type:" + type);
 		boolean flag = false;
 		request.setAttribute("msg", "删除成功了");
 		if (null == type || null == id || id.equals("")) {

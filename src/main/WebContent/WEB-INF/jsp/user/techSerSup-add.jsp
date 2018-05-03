@@ -6,7 +6,7 @@
 <body>
 	<article class="page-container">
 		<form action="/sys_edu/user/techSerSup-save" method="post"
-			class="form form-horizontal" id="form-bill-add">
+			class="form form-horizontal" id="search_form">
 			<div class="row cl">
 				<label class="form-label col-xs-4 col-sm-3">行业：</label>
 				<div class="formControls col-xs-8 col-sm-9">
@@ -39,7 +39,7 @@
 			</div>
 			<div class="row cl">
 				<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
-					<button type="submit" class="btn btn-success radius" id="bill-save"
+					<button id="search_btn" class="btn btn-success radius" type="submit"
 						name="bill-save">
 						<i class="icon-ok"></i> 确定
 					</button>
@@ -63,7 +63,7 @@
 	<script type="text/javascript">
 		$(function() {
 			var techSer = ${techSer};
-			if (null == techSer)
+			if (techSer.add=="add")
 				return;
 			console.info(techSer);
 			$("indSelect>option").each(function() {

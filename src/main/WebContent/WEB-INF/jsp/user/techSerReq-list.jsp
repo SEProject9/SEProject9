@@ -19,7 +19,7 @@ p {
 		<c:if test="${null!=sessionScope.user }">
 		<a class="btn btn-primary radius"
 			data-title="添加" href="javascript:;"
-			onclick="techSer_add('添加用户','/sys_edu/user/techSerReq-add')"><i
+			onclick="techSer_add('添加','/sys_edu/user/techSerReq-add')"><i
 				class="Hui-iconfont">&#xe600;</i> 添加</a>
 				</c:if></span>
 		<div class="text-c">
@@ -51,7 +51,7 @@ p {
 		</c:forEach>
 
 
-		<div style="text-align: center; margin-top: 20px">
+		<div style="text-align: center; margin: 20px">
 			<c:if test="${page.start!=0}">
 				<a href="?start=0">首 页</a>
 				<a href="?start=${page.start-page.count}">上一页</a>
@@ -73,7 +73,10 @@ p {
 				type : 2,
 				title : title,
 				content : url,
-				area : [ '1000px', '550px' ]
+				area : [ '1000px', '550px' ],
+				end: function () {		//!!!只要弹窗销毁就会执行
+	                location.reload();
+	            }
 			});
 		}
 		$("#search_btn").click(function() {

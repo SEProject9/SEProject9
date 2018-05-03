@@ -16,7 +16,9 @@
 		<br /> ${info.text }<br />
 
 	</div>
-
+	
+<iframe src="list/displayPDF"
+        width="100%" height="800"></iframe>
 
 	<%@include file="/WEB-INF/jsp/include/_footer.jsp"%>
 	<script type="text/javascript">

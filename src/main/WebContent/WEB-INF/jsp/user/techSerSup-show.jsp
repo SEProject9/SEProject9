@@ -6,7 +6,7 @@
 <body>
 	<div class="cl pd-5 bg-1 bk-gray">
 		<span class="l"> <c:if
-				test="${session.Scope.user.ent_id.equals(info.ent_id)}">
+				test="${sessionScope.user.ent_id.equals(info.ent_id)}">
 				<a class="btn btn-primary radius" data-title="删除"
 					data-href="techSer-del?type=sup"
 					href="/sys_edu/user/techSer-del?type=sup&id=${info.sup_id}"><i
@@ -17,7 +17,7 @@
 			</c:if>
 		</span>
 	</div>
-	msg:${msg}
+
 	<div style="width: 500px; margin: auto; text-align: center">
 		<h1>${info.sup_title }</h1>
 
